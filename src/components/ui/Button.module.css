@@ -1,0 +1,140 @@
+/* src/components/ui/Button.module.css */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition);
+    white-space: nowrap;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn:active {
+    transform: translateY(0);
+  }
+  
+  .btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Variants */
+  .primary {
+    background: var(--gold);
+    color: var(--navy);
+    border-color: var(--gold);
+    box-shadow: 0 4px 16px rgba(201, 168, 76, 0.25);
+  }
+  
+  .primary:hover:not(:disabled) {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    box-shadow: 0 8px 24px rgba(201, 168, 76, 0.4);
+  }
+  
+  .secondary {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+  }
+  
+  .secondary:hover:not(:disabled) {
+    background: var(--navy-light);
+    border-color: var(--navy-light);
+  }
+  
+  .outline {
+    background: transparent;
+    color: var(--navy);
+    border-color: var(--navy);
+  }
+  
+  .outline:hover:not(:disabled) {
+    background: var(--navy);
+    color: var(--white);
+  }
+  
+  .outlineWhite {
+    background: transparent;
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .outlineWhite:hover:not(:disabled) {
+    background: var(--white);
+    color: var(--navy);
+    border-color: var(--white);
+  }
+  
+  .ghost {
+    background: transparent;
+    color: var(--gold);
+    border-color: transparent;
+  }
+  
+  .ghost:hover:not(:disabled) {
+    background: rgba(201, 168, 76, 0.1);
+  }
+  
+  .danger {
+    background: var(--error);
+    color: var(--white);
+    border-color: var(--error);
+  }
+  
+  .danger:hover:not(:disabled) {
+    background: #a93226; /* Une teinte plus foncée de error */
+  }
+  
+  /* Sizes */
+  .sm {
+    padding: 8px 20px;
+    font-size: 13px;
+  }
+  
+  .md {
+    padding: 12px 28px;
+    font-size: 15px;
+  }
+  
+  .lg {
+    padding: 16px 40px;
+    font-size: 16px;
+  }
+  
+  .fullWidth {
+    width: 100%;
+  }
+  
+  /* Loader spinner */
+  .spinner {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: currentColor; /* Utilise la couleur du texte du bouton */
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

@@ -1,0 +1,37 @@
+/* src/app/contact/page.module.css */
+.heroBanner {
+    background: var(--navy);
+    padding: 80px 0 60px;
+    position: relative;
+    margin-bottom: 20px;
+    background-image: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+  }
+  
+  .heroTitle {
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--white);
+    font-weight: 900;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+  
+  .heroSubtitle {
+    font-size: 18px;
+    color: var(--gold);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 36px;
+    }
+    
+    .heroSubtitle {
+      font-size: 16px;
+      padding: 0 20px;
+    }
+  }

@@ -1,0 +1,209 @@
+/* src/app/admin/login/page.module.css */
+.loginPage {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .loginPage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/cross-pattern.png');
+    opacity: 0.05;
+    pointer-events: none;
+  }
+  
+  .loginContainer {
+    width: 100%;
+    max-width: 420px;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .loginCard {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 48px 40px;
+    box-shadow: var(--shadow-lg);
+    border-top: 4px solid var(--gold);
+    animation: fadeInUp 0.6s ease;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .logoSection {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  
+  .logo {
+    margin: 0 auto 16px;
+  }
+  
+  .title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  
+  .subtitle {
+    font-size: 14px;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+  
+  .form {
+    margin-bottom: 24px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 24px;
+  }
+  
+  .label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .inputIcon {
+    position: absolute;
+    left: 16px;
+    color: var(--text-light);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .inputIcon svg {
+    font-size: 20px;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-dark);
+    background: var(--cream);
+    transition: all var(--transition);
+  }
+  
+  .input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.12);
+  }
+  
+  .input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  .passwordToggle {
+    position: absolute;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0;
+    font-size: 20px;
+  }
+  
+  .passwordToggle:hover {
+    color: var(--gold);
+  }
+  
+  .passwordToggle svg {
+    font-size: 20px;
+  }
+  
+  .errorMessage {
+    background: rgba(192, 57, 43, 0.1);
+    color: var(--error);
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 24px;
+    font-size: 14px;
+    border-left: 4px solid var(--error);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .backLink {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .backLink a {
+    color: var(--text-light);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .backLink a:hover {
+    color: var(--gold);
+  }
+  
+  .credit {
+    text-align: center;
+    margin-top: 24px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 12px;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 480px) {
+    .loginCard {
+      padding: 36px 24px;
+    }
+  
+    .title {
+      font-size: 24px;
+    }
+  
+    .logo {
+      width: 60px;
+      height: 60px;
+    }
+  }

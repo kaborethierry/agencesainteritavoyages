@@ -1,0 +1,111 @@
+/* src/app/globals.css */
+
+/* --------------------------------------
+   1. IMPORT POLICES (Google Fonts)
+-------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Lato:wght@300;400;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap');
+
+/* --------------------------------------
+   2. VARIABLES CSS (Theming)
+-------------------------------------- */
+:root {
+  /* COULEURS */
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dark: #9C7A2E;
+  --navy: #1A2B4A;
+  --navy-light: #243660;
+  --cream: #FAF7F2;
+  --cream-dark: #F0EBE0;
+  --white: #FFFFFF;
+  --text-dark: #1A1A2E;
+  --text-mid: #4A5568;
+  --text-light: #718096;
+  --success: #2D6A4F;
+  --error: #C0392B;
+  --border: #DDD5C5;
+
+  /* TYPOGRAPHIE */
+  --font-display: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+  --font-accent: 'Cormorant Garamond', serif;
+
+  /* EFFETS */
+  --shadow-sm: 0 2px 8px rgba(26, 43, 74, 0.08);
+  --shadow-md: 0 8px 24px rgba(26, 43, 74, 0.12);
+  --shadow-lg: 0 16px 48px rgba(26, 43, 74, 0.18);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --------------------------------------
+   3. RESET & STYLES DE BASE
+-------------------------------------- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--cream);
+  color: var(--text-dark);
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-body);
+  border: none;
+  background: none;
+}
+
+/* --------------------------------------
+   4. UTILITAIRES GLOBAUX
+-------------------------------------- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 60px;
+}
+
+.container-sm {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+  .container-sm {
+    padding: 0 24px;
+  }
+}

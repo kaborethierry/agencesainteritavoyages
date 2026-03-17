@@ -1,0 +1,124 @@
+/* src/app/pelerinages/[id]/page.module.css */
+.similarSection {
+    padding: 80px 0;
+    background: var(--cream);
+  }
+  
+  .similarTitle {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 48px;
+    position: relative;
+    padding-bottom: 20px;
+  }
+  
+  .similarTitle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+  }
+  
+  .similarGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  
+  .ctaBanner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .ctaBanner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('/images/cross-pattern.png');
+    opacity: 0.1;
+  }
+  
+  .ctaContent {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .ctaTitle {
+    font-family: var(--font-display);
+    font-size: 36px;
+    color: var(--white);
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+  
+  .ctaText {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 32px;
+  }
+  
+  .ctaButtons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 992px) {
+    .similarGrid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    
+    .ctaTitle {
+      font-size: 30px;
+    }
+    
+    .ctaText {
+      font-size: 16px;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .similarSection {
+      padding: 60px 0;
+    }
+    
+    .similarTitle {
+      font-size: 26px;
+      margin-bottom: 32px;
+    }
+    
+    .similarGrid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    
+    .ctaBanner {
+      padding: 60px 0;
+    }
+    
+    .ctaTitle {
+      font-size: 24px;
+    }
+    
+    .ctaButtons {
+      flex-direction: column;
+      gap: 12px;
+    }
+  }

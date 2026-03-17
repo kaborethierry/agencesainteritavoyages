@@ -1,0 +1,124 @@
+/* src/components/admin/AdminSidebar.module.css */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--navy);
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+    overflow-y: auto;
+  }
+  
+  .sidebarLogo {
+    padding: 28px 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logoText {
+    font-family: var(--font-display);
+    color: var(--white);
+    font-size: 18px;
+    font-weight: 700;
+    display: block;
+    line-height: 1.2;
+  }
+  
+  .logoSub {
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    line-height: 1.2;
+  }
+  
+  .sidebarNav {
+    flex: 1;
+    padding: 24px 12px;
+  }
+  
+  .navItem {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 15px;
+    transition: all var(--transition);
+    cursor: pointer;
+    margin-bottom: 4px;
+    border-left: 3px solid transparent;
+    text-decoration: none;
+  }
+  
+  .navItem:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .navItemActive {
+    background: rgba(201, 168, 76, 0.15);
+    color: var(--white);
+    border-left-color: var(--gold);
+    font-weight: 700;
+  }
+  
+  .navIcon {
+    font-size: 20px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navIcon svg {
+    font-size: 20px;
+  }
+  
+  .navBadge {
+    margin-left: auto;
+    background: var(--error);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  
+  .sidebarFooter {
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  
+  .logoutBtn {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    cursor: pointer;
+  }
+  
+  .logoutBtn:hover {
+    background: rgba(192, 57, 43, 0.2);
+    color: #E74C3C;
+    border-color: #E74C3C;
+  }
+  
+  .logoutBtn svg {
+    font-size: 18px;
+  }

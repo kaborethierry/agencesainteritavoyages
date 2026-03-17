@@ -1,0 +1,370 @@
+/* src/app/admin/pelerinages/nouveau/page.module.css */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    margin-bottom: 32px;
+  }
+  
+  .title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-light);
+  }
+  
+  .loadingContainer {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+  
+  .form {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    margin-bottom: 60px;
+  }
+  
+  .section {
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .section:last-child {
+    border-bottom: none;
+  }
+  
+  .sectionHeader {
+    padding: 20px 32px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background var(--transition);
+  }
+  
+  .sectionHeader:hover {
+    background: var(--cream-dark);
+  }
+  
+  .sectionTitle {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--navy);
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .sectionContent {
+    padding: 32px;
+  }
+  
+  .formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .formGroup.fullWidth {
+    grid-column: 1 / -1;
+  }
+  
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .required {
+    color: var(--error);
+    margin-left: 4px;
+  }
+  
+  .input,
+  .select,
+  .textarea {
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--text-dark);
+    background: var(--cream);
+    transition: all var(--transition);
+    width: 100%;
+  }
+  
+  .input:focus,
+  .select:focus,
+  .textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
+  }
+  
+  .textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .fieldNote {
+    font-size: 12px;
+    color: var(--text-light);
+    text-align: right;
+  }
+  
+  /* Image upload */
+  .imageUpload {
+    width: 100%;
+  }
+  
+  .imagePreview {
+    position: relative;
+    width: 200px;
+    height: 150px;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    border: 2px solid var(--border);
+  }
+  
+  .previewImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .removeImage {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--error);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  
+  .removeImage:hover {
+    transform: scale(1.1);
+    background: #a93226;
+  }
+  
+  .removeImage svg {
+    font-size: 18px;
+  }
+  
+  .uploadPlaceholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 200px;
+    height: 150px;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-md);
+    background: var(--cream);
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  
+  .uploadPlaceholder:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  
+  .uploadPlaceholder svg {
+    font-size: 32px;
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  /* Programme */
+  .jourItem {
+    background: var(--cream);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+  
+  .jourHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .jourTitle {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--navy);
+    font-weight: 600;
+    margin: 0;
+  }
+  
+  .removeJourBtn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(192, 57, 43, 0.1);
+    color: var(--error);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  
+  .removeJourBtn:hover {
+    background: var(--error);
+    color: white;
+  }
+  
+  .removeJourBtn svg {
+    font-size: 18px;
+  }
+  
+  .addJourBtn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: none;
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-mid);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .addJourBtn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  
+  .addJourBtn svg {
+    font-size: 18px;
+  }
+  
+  /* Tags */
+  .tagsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 12px;
+    min-height: 40px;
+    padding: 8px;
+    background: var(--cream);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+  }
+  
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    background: var(--white);
+    border: 1px solid var(--gold);
+    border-radius: 50px;
+    font-size: 13px;
+    color: var(--navy);
+  }
+  
+  .tagRemove {
+    background: none;
+    border: none;
+    color: var(--text-light);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .tagRemove:hover {
+    color: var(--error);
+  }
+  
+  .tagInput {
+    margin-top: 8px;
+  }
+  
+  /* Actions */
+  .formActions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+    padding: 32px;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 24px;
+    }
+  
+    .sectionHeader {
+      padding: 16px 20px;
+    }
+  
+    .sectionContent {
+      padding: 20px;
+    }
+  
+    .formGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .imagePreview,
+    .uploadPlaceholder {
+      width: 100%;
+      height: 200px;
+    }
+  
+    .formActions {
+      flex-direction: column;
+    }
+  
+    .formActions button,
+    .formActions a {
+      width: 100%;
+    }
+  }

@@ -1,0 +1,122 @@
+// src/components/layout/Navbar.jsx
+'use client';
+
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import Image from 'next/image';
+import Button from '@/components/ui/Button';
+import styles from './Navbar.module.css';
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  // Gestion de l'effet de scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 80);
+    };
+    window.addEventListener('scroll', handleScroll);
+    // Nettoyage
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Fermer le menu mobile lors d'un changement de route
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
+  // Empêcher le scroll du body quand le menu mobile est ouvert
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [menuOpen]);
+
+  const toggleMenu = () => setMenuOpen(!menuOpen);
+
+  // Fonction pour déterminer si un lien est actif
+  const isActive = (path) => {
+    if (path === '/' && pathname !== '/') return false;
+    return pathname === path || pathname?.startsWith(path + '/');
+  };
+
+  const navLinks = [
+    { href: '/', label: 'Accueil' },
+    { href: '/pelerinages', label: 'Pèlerinages' },
+    { href: '/a-propos', label: 'À Propos' },
+    { href: '/contact', label: 'Contact' },
+  ];
+
+  return (
+    <>
+      <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
+        <div className={styles.logo}>
+          <Image
+            src="/images/logo-white.png"
+            alt="Logo Agence"
+            width={45}
+            height={45}
+            priority
+          />
+          <div className={styles.logoText}>
+            <span className={styles.logoName}>Agence Sainte Rita Voyages</span>
+            <span className={styles.logoTagline}>PÈLERINAGES CHRÉTIENS</span>
+          </div>
+        </div>
+
+        <ul className={styles.navLinks}>
+          {navLinks.map((link) => (
+            <li key={link.href}>
+              <Link
+                href={link.href}
+                className={isActive(link.href) ? styles.active : ''}
+              >
+                {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <div className={styles.navActions}>
+          <Button href="/inscription" variant="primary" size="sm">
+            S'inscrire
+          </Button>
+        </div>
+
+        <button
+          className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
+          onClick={toggleMenu}
+          aria-label="Menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </nav>
+
+      {/* Menu Mobile */}
+      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
+        {navLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            onClick={() => setMenuOpen(false)}
+          >
+            {link.label}
+          </Link>
+        ))}
+        <Button href="/inscription" variant="primary" size="lg" fullWidth>
+          S'inscrire
+        </Button>
+      </div>
+    </>
+  );
+}

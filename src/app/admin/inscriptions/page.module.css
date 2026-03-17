@@ -1,0 +1,425 @@
+/* src/app/admin/inscriptions/page.module.css */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    color: var(--text-light);
+  }
+  
+  .searchBar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .searchInputWrapper {
+    flex: 1;
+    position: relative;
+  }
+  
+  .searchIcon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    font-size: 20px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    background: var(--white);
+    transition: all var(--transition);
+  }
+  
+  .searchInput:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
+  }
+  
+  .filterToggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 20px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    color: var(--navy);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+  }
+  
+  .filterToggle:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  
+  .filtersPanel {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  
+  .filterGroup {
+    min-width: 200px;
+    flex: 1;
+  }
+  
+  .filterLabel {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  
+  .filterSelect {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    background: var(--cream);
+    cursor: pointer;
+  }
+  
+  .filterSelect:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+  
+  .resetFilters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: none;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text-mid);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
+  }
+  
+  .resetFilters:hover {
+    border-color: var(--error);
+    color: var(--error);
+  }
+  
+  .resetFilters svg {
+    font-size: 18px;
+  }
+  
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  
+  .tab {
+    padding: 12px 24px;
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .tab:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+  
+  .tabActive {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: var(--navy);
+  }
+  
+  .tabCount {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2px 8px;
+    border-radius: 50px;
+    font-size: 12px;
+  }
+  
+  .tabActive .tabCount {
+    background: rgba(26, 43, 74, 0.15);
+  }
+  
+  .statusBadge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .statusBadge.en_attente {
+    background: rgba(230, 126, 34, 0.15);
+    color: #E67E22;
+  }
+  
+  .statusBadge.confirmee {
+    background: rgba(45, 106, 79, 0.15);
+    color: var(--success);
+  }
+  
+  .statusBadge.annulee {
+    background: rgba(192, 57, 43, 0.15);
+    color: var(--error);
+  }
+  
+  .actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .actionBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-sm);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition);
+    background: none;
+  }
+  
+  .actionBtn svg {
+    font-size: 18px;
+  }
+  
+  .actionView {
+    background: rgba(26, 43, 74, 0.08);
+    color: var(--navy);
+  }
+  
+  .actionView:hover {
+    background: var(--navy);
+    color: var(--white);
+  }
+  
+  .actionConfirm {
+    background: rgba(45, 106, 79, 0.1);
+    color: var(--success);
+  }
+  
+  .actionConfirm:hover {
+    background: var(--success);
+    color: var(--white);
+  }
+  
+  .actionCancel {
+    background: rgba(192, 57, 43, 0.1);
+    color: var(--error);
+  }
+  
+  .actionCancel:hover {
+    background: var(--error);
+    color: var(--white);
+  }
+  
+  .loadingContainer {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 60px;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+  }
+  
+  /* Modal */
+  .modalContent {
+    padding: 8px 0;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .modalStatus {
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .modalStatus.en_attente {
+    background: rgba(230, 126, 34, 0.15);
+    color: #E67E22;
+  }
+  
+  .modalStatus.confirmee {
+    background: rgba(45, 106, 79, 0.15);
+    color: var(--success);
+  }
+  
+  .modalStatus.annulee {
+    background: rgba(192, 57, 43, 0.15);
+    color: var(--error);
+  }
+  
+  .modalReference {
+    font-size: 13px;
+    color: var(--text-light);
+    font-family: monospace;
+  }
+  
+  .modalGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  
+  .modalSection {
+    background: var(--cream);
+    padding: 20px;
+    border-radius: var(--radius-md);
+  }
+  
+  .modalSection.fullWidth {
+    grid-column: 1 / -1;
+  }
+  
+  .modalSectionTitle {
+    font-family: var(--font-display);
+    font-size: 16px;
+    color: var(--navy);
+    margin-bottom: 16px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .modalRow {
+    display: flex;
+    margin-bottom: 12px;
+    font-size: 14px;
+  }
+  
+  .modalLabel {
+    width: 120px;
+    color: var(--text-light);
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  
+  .modalValue {
+    color: var(--text-dark);
+    font-weight: 400;
+    flex: 1;
+  }
+  
+  .modalFooter {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .title {
+      font-size: 24px;
+    }
+  
+    .searchBar {
+      flex-direction: column;
+    }
+  
+    .filtersPanel {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .filterGroup {
+      min-width: auto;
+    }
+  
+    .resetFilters {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    .tabs {
+      flex-wrap: wrap;
+    }
+  
+    .tab {
+      flex: 1;
+      justify-content: center;
+    }
+  
+    .modalGrid {
+      grid-template-columns: 1fr;
+    }
+  
+    .modalRow {
+      flex-direction: column;
+      gap: 4px;
+    }
+  
+    .modalLabel {
+      width: auto;
+    }
+  
+    .modalFooter {
+      flex-direction: column;
+    }
+  
+    .modalFooter button {
+      width: 100%;
+    }
+  }

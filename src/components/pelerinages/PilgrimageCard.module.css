@@ -1,0 +1,233 @@
+/* src/components/pelerinages/PilgrimageCard.module.css */
+.card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transition), box-shadow var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border: 1px solid var(--border);
+  }
+  
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .imageWrapper {
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  
+  .card:hover .image {
+    transform: scale(1.08);
+  }
+  
+  .badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .badgeDuration {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--navy);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .badgeWarning {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: #E67E22;
+    color: white;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    animation: pulse 2s infinite;
+  }
+  
+  .badgeComplet {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--error);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(230, 126, 34, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(230, 126, 34, 0);
+    }
+  }
+  
+  .body {
+    padding: 24px 24px 16px;
+    flex: 1;
+  }
+  
+  .location {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  .title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--navy);
+    font-weight: 700;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    min-height: 54px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .description {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .dates {
+    font-size: 14px;
+    color: var(--text-mid);
+    display: block;
+    margin-bottom: 12px;
+  }
+  
+  .footer {
+    padding: 16px 24px 24px;
+    border-top: 1px solid var(--border);
+    background: var(--cream);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+  }
+  
+  .priceRow {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .priceLabel {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 400;
+  }
+  
+  .price {
+    font-family: var(--font-display);
+    font-size: 26px;
+    color: var(--gold-dark);
+    font-weight: 700;
+    line-height: 1;
+  }
+  
+  .priceSuffix {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+  
+  .dateInfo {
+    margin-bottom: 16px;
+  }
+  
+  .cardBtn {
+    width: 100%;
+    padding: 14px;
+    background: var(--navy);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    transition: background var(--transition);
+    cursor: pointer;
+  }
+  
+  .cardBtn:hover {
+    background: var(--navy-light);
+  }
+  
+  /* Media Queries */
+  @media (max-width: 600px) {
+    .imageWrapper {
+      height: 200px;
+    }
+    
+    .title {
+      font-size: 18px;
+      min-height: auto;
+    }
+    
+    .price {
+      font-size: 22px;
+    }
+    
+    .body {
+      padding: 20px 20px 12px;
+    }
+    
+    .footer {
+      padding: 12px 20px 20px;
+    }
+  }

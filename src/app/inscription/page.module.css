@@ -1,0 +1,109 @@
+/* src/app/inscription/page.module.css */
+.heroBanner {
+    background: var(--cream-dark);
+    padding: 60px 0 40px;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .breadcrumb {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .breadcrumb .current {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  
+  .heroTitle {
+    font-family: var(--font-display);
+    font-size: 42px;
+    color: var(--navy);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  
+  .heroSubtitle {
+    font-size: 18px;
+    color: var(--text-mid);
+    max-width: 700px;
+  }
+  
+  .assuranceSection {
+    background: var(--cream);
+    padding: 60px 0 80px;
+  }
+  
+  .assuranceGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .assuranceItem {
+    text-align: center;
+    padding: 32px 24px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition);
+  }
+  
+  .assuranceItem:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .assuranceIcon {
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-size: 48px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .assuranceIcon svg {
+    font-size: 48px;
+  }
+  
+  .assuranceTitle {
+    font-family: var(--font-display);
+    font-size: 18px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .assuranceText {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .heroTitle {
+      font-size: 32px;
+    }
+    
+    .heroSubtitle {
+      font-size: 16px;
+    }
+    
+    .assuranceGrid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+      padding: 0 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .heroTitle {
+      font-size: 28px;
+    }
+  }
