@@ -1,4 +1,5 @@
 // src/app/inscription/page.jsx
+"use client";
 import InscriptionForm from '@/components/inscription/InscriptionForm';
 import LockIcon from '@mui/icons-material/Lock';
 import EmailIcon from '@mui/icons-material/Email';
