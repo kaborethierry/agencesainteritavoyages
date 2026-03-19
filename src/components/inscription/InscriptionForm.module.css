@@ -317,3 +317,185 @@
     padding: 40px 16px;
   }
 }
+/* À ajouter dans InscriptionForm.module.css */
+
+.documentsContainer {
+  margin-top: 24px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--white);
+}
+
+.documentsHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: var(--cream);
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.documentsHeader:hover {
+  background: var(--cream-dark);
+}
+
+.documentsTitle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.documentsIcon {
+  color: var(--gold);
+  font-size: 24px;
+}
+
+.documentsTitle h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--navy);
+  margin: 0;
+  font-weight: 600;
+}
+
+.documentsContent {
+  padding: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.destinationSection {
+  margin-bottom: 24px;
+}
+
+.destinationTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--gold-dark);
+  margin-bottom: 20px;
+  font-weight: 700;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--gold);
+}
+
+.statutSection {
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 3px solid var(--gold-light);
+}
+
+.statutSection h5 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.commonDocs {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: rgba(201, 168, 76, 0.05);
+  border-radius: var(--radius-sm);
+}
+
+.commonDocs h5 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.documentList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.documentList li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
+  font-size: 14px;
+  color: var(--text-dark);
+}
+
+.documentList li:last-child {
+  border-bottom: none;
+}
+
+.documentList input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.financialNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(201, 168, 76, 0.08);
+  border-radius: var(--radius-sm);
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+
+.financialNote svg {
+  color: var(--gold);
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.financialNote p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.documentsNote {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--text-light);
+  margin-top: 20px;
+}
+
+.documentsNote svg {
+  color: var(--gold);
+  font-size: 18px;
+}
+
+/* Media Queries supplémentaires */
+@media (max-width: 768px) {
+  .documentsHeader {
+    padding: 16px 20px;
+  }
+
+  .documentsContent {
+    padding: 16px;
+  }
+
+  .statutSection {
+    padding-left: 12px;
+  }
+
+  .documentList li {
+    font-size: 13px;
+  }
+
+  .financialNote {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
