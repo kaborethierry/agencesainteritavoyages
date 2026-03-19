@@ -1,0 +1,196 @@
+.section {
+    padding: 100px 0;
+    background: var(--cream);
+    overflow: hidden;
+  }
+  
+  /* GRID */
+  .galleryGrid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+    margin-top: 56px;
+  }
+  
+  /* ITEM */
+  .galleryItem {
+    position: relative;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+    cursor: pointer;
+  }
+  
+  .galleryItemVisible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Layout dynamique desktop */
+  .galleryItem:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+    aspect-ratio: 4/3;
+  }
+  
+  .galleryItem:nth-child(2) {
+    aspect-ratio: 1/1;
+  }
+  
+  .galleryItem:nth-child(3) {
+    grid-column: span 2;
+    aspect-ratio: 16/9;
+  }
+  
+  .galleryItem:nth-child(4) {
+    grid-row: span 2;
+    aspect-ratio: 3/4;
+  }
+  
+  .galleryItem:nth-child(5) {
+    grid-column: span 3;
+    aspect-ratio: 21/9;
+  }
+  
+  /* IMAGE */
+  .imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .image {
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  .galleryItem:hover .image {
+    transform: scale(1.08);
+  }
+  
+  /* OVERLAY */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(26, 43, 74, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+  }
+  
+  .galleryItem:hover .overlay {
+    opacity: 1;
+  }
+  
+  .zoomIcon {
+    color: white;
+    font-size: 40px;
+  }
+  
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .lightboxContent {
+    position: relative;
+    width: 95%;
+    max-width: 1100px;
+    height: 80vh;
+  }
+  
+  .lightboxImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .lightboxImage {
+    object-fit: contain;
+  }
+  
+  /* BUTTONS */
+  .closeBtn {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  /* NAVIGATION FIXÉE */
+  .navBtn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* 🔥 FIX IMPORTANT */
+  .left {
+    left: 10px;
+  }
+  
+  .right {
+    right: 10px;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 1200px) {
+    .galleryGrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .section {
+      padding: 60px 0;
+    }
+  
+    .galleryGrid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+  
+    .galleryItem {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+      aspect-ratio: 1/1 !important;
+    }
+  
+    .navBtn {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .closeBtn {
+      top: -30px;
+      font-size: 24px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .galleryGrid {
+      grid-template-columns: 1fr;
+    }
+  }

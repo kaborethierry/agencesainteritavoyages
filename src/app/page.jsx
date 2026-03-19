@@ -4,10 +4,10 @@ import FeaturedPilgrimages from '@/components/home/FeaturedPilgrimages';
 import WhyChooseUs from '@/components/home/WhyChooseUs';
 import VersetBible from '@/components/home/VersetBible';
 import Testimonials from '@/components/home/Testimonials';
+import PhotoGallery from '@/components/home/PhotoGallery'; // Import de la galerie
 
-// 📌 SEO spécifique à la page d'accueil
 export const metadata = {
-  title: 'Accueil', // Sera combiné avec le template : "Accueil — Pèlerinages Chrétiens"
+  title: 'Accueil — Agence Sainte Rita Voyages',
 };
 
 export default function HomePage() {
@@ -18,6 +18,7 @@ export default function HomePage() {
       <WhyChooseUs />
       <VersetBible />
       <Testimonials />
+      <PhotoGallery /> {/* Galerie ajoutée ici */}
     </>
   );
 }
