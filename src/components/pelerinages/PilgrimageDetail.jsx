@@ -5,6 +5,14 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import HotelIcon from '@mui/icons-material/Hotel';
+import FlightIcon from '@mui/icons-material/Flight';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CancelIcon from '@mui/icons-material/Cancel';
+import PhoneIcon from '@mui/icons-material/Phone';
 import styles from './PilgrimageDetail.module.css';
 
 export default function PilgrimageDetail({ pilgrimage }) {
@@ -35,13 +43,6 @@ export default function PilgrimageDetail({ pilgrimage }) {
     return new Intl.NumberFormat('fr-FR').format(price) + ' ' + currency;
   };
 
-  // Simuler des places disponibles (à remplacer par des données réelles)
-  const placesTotal = 30;
-  const placesPrises = 22;
-  const placesRestantes = placesTotal - placesPrises;
-  const placesWarning = placesRestantes < 5 && placesRestantes > 0;
-  const complet = placesRestantes === 0;
-
   // Gestion de l'accordéon FAQ
   const toggleAccordion = (index) => {
     setAccordionOpen(prev => ({
@@ -61,7 +62,7 @@ export default function PilgrimageDetail({ pilgrimage }) {
       answer: "Passeport en cours de validité (6 mois après la date de retour), visa selon la destination, et une assurance rapatriement (incluse dans nos formules)."
     },
     {
-      question: "Puis-je annuler mon pèlerinage ?",
+      question: "Puis-je annuler mon voyage ?",
       answer: "Oui, selon nos conditions d'annulation. Jusqu'à 60 jours avant, remboursement intégral. Entre 60 et 30 jours, retenue de 25%. Après, selon les frais réels."
     }
   ];
@@ -84,9 +85,17 @@ export default function PilgrimageDetail({ pilgrimage }) {
               <span className={styles.heroLocation}>{location}</span>
               <h1 className={styles.heroTitle}>{title}</h1>
               <div className={styles.heroBadges}>
-                <span className={styles.heroBadge}>📅 {startDate}</span>
-                <span className={styles.heroBadge}>⏱️ {duration}</span>
-                {featured && <span className={styles.heroBadgeGold}>🌟 À la une</span>}
+                <span className={styles.heroBadge}>
+                  <CalendarTodayIcon fontSize="small" /> {startDate}
+                </span>
+                <span className={styles.heroBadge}>
+                  <AccessTimeIcon fontSize="small" /> {duration}
+                </span>
+                {featured && (
+                  <span className={styles.heroBadgeGold}>
+                    ★ À la une
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -157,7 +166,9 @@ export default function PilgrimageDetail({ pilgrimage }) {
 
               <div className={styles.inclusionGrid}>
                 <div className={styles.included}>
-                  <h4 className={styles.inclusionTitle}>✅ Ce qui est inclus</h4>
+                  <h4 className={styles.inclusionTitle}>
+                    <CheckCircleIcon className={styles.inclusionIcon} /> Ce qui est inclus
+                  </h4>
                   <ul className={styles.inclusionList}>
                     {included.map((item, index) => (
                       <li key={index}>{item}</li>
@@ -166,7 +177,9 @@ export default function PilgrimageDetail({ pilgrimage }) {
                 </div>
 
                 <div className={styles.notIncluded}>
-                  <h4 className={styles.inclusionTitle}>❌ Ce qui n'est pas inclus</h4>
+                  <h4 className={styles.inclusionTitle}>
+                    <CancelIcon className={styles.inclusionIcon} /> Ce qui n'est pas inclus
+                  </h4>
                   <ul className={styles.inclusionList}>
                     {notIncluded.map((item, index) => (
                       <li key={index}>{item}</li>
@@ -184,28 +197,39 @@ export default function PilgrimageDetail({ pilgrimage }) {
               
               <div className={styles.infoGrid}>
                 <div className={styles.infoItem}>
-                  <strong>📅 Dates</strong>
-                  <p>Du {startDate} au {endDate || 'à confirmer'}</p>
+                  <CalendarTodayIcon className={styles.infoIcon} />
+                  <div>
+                    <strong>Dates</strong>
+                    <p>Du {startDate} au {endDate || 'à confirmer'}</p>
+                  </div>
                 </div>
                 <div className={styles.infoItem}>
-                  <strong>⏱️ Durée</strong>
-                  <p>{duration}</p>
+                  <AccessTimeIcon className={styles.infoIcon} />
+                  <div>
+                    <strong>Durée</strong>
+                    <p>{duration}</p>
+                  </div>
                 </div>
                 <div className={styles.infoItem}>
-                  <strong>📍 Destination</strong>
-                  <p>{location}</p>
+                  <LocationOnIcon className={styles.infoIcon} />
+                  <div>
+                    <strong>Destination</strong>
+                    <p>{location}</p>
+                  </div>
                 </div>
                 <div className={styles.infoItem}>
-                  <strong>👥 Groupe</strong>
-                  <p>20 à 40 personnes</p>
+                  <HotelIcon className={styles.infoIcon} />
+                  <div>
+                    <strong>Hébergement</strong>
+                    <p>Hôtels 3* et 4* selon disponibilités</p>
+                  </div>
                 </div>
                 <div className={styles.infoItem}>
-                  <strong>🛏️ Hébergement</strong>
-                  <p>Hôtels 3* et 4* selon disponibilités</p>
-                </div>
-                <div className={styles.infoItem}>
-                  <strong>✈️ Transport</strong>
-                  <p>Vols inclus au départ de Paris</p>
+                  <FlightIcon className={styles.infoIcon} />
+                  <div>
+                    <strong>Transport</strong>
+                    <p>Vols inclus au départ de Paris</p>
+                  </div>
                 </div>
               </div>
 
@@ -278,56 +302,33 @@ export default function PilgrimageDetail({ pilgrimage }) {
 
           <div className={styles.infoList}>
             <div className={styles.infoRow}>
-              <span>📅 Date de départ</span>
+              <CalendarTodayIcon className={styles.infoRowIcon} />
+              <span>Date de départ</span>
               <strong>{startDate}</strong>
             </div>
             <div className={styles.infoRow}>
-              <span>⏱️ Durée</span>
+              <AccessTimeIcon className={styles.infoRowIcon} />
+              <span>Durée</span>
               <strong>{duration}</strong>
             </div>
             <div className={styles.infoRow}>
-              <span>📍 Destination</span>
+              <LocationOnIcon className={styles.infoRowIcon} />
+              <span>Destination</span>
               <strong>{location}</strong>
             </div>
-            <div className={styles.infoRow}>
-              <span>👥 Places restantes</span>
-              <strong className={placesWarning ? styles.warningText : ''}>
-                {placesRestantes} / {placesTotal}
-              </strong>
-            </div>
           </div>
-
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${(placesPrises / placesTotal) * 100}%` }}
-            ></div>
-          </div>
-
-          {placesWarning && (
-            <p className={styles.warningMessage}>
-              ⚡ Plus que {placesRestantes} places disponibles !
-            </p>
-          )}
-
-          {complet && (
-            <p className={styles.completMessage}>
-              Désolé, ce pèlerinage est complet
-            </p>
-          )}
 
           <Button
             href={`/inscription?pelerinage=${id}`}
             variant="primary"
             size="lg"
             fullWidth
-            disabled={complet}
           >
-            {complet ? 'Complet' : "S'inscrire maintenant"}
+            S'inscrire maintenant
           </Button>
 
           <Button variant="ghost" size="md" fullWidth>
-            📞 Nous appeler
+            <PhoneIcon /> Nous appeler
           </Button>
         </div>
       </div>

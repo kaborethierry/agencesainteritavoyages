@@ -280,16 +280,17 @@ export default function PilgrimagesPage() {
       <div className={styles.heroBanner}>
         <div className={styles.overlay}></div>
         <div className="container">
-          <h1 className={styles.heroTitle}>Nos Pèlerinages</h1>
+          <h1 className={styles.heroTitle}>Nos voyages spirituels</h1>
           <p className={styles.heroSubtitle}>
-            Découvrez tous nos voyages spirituels organisés dans les lieux saints du monde entier
+          Découvrez tous nos voyages organisés dans les lieux saints du monde entier
+
           </p>
         </div>
       </div>
 
       <div className="container">
         <SectionTitle
-          surtitre="PÈLERINAGES 2026"
+          surtitre="VOYAGES 2026"
           titre="Choisissez votre destination spirituelle"
           description="Que vous cherchiez à marcher sur les pas du Christ en Terre Sainte, à prier dans les grands sanctuaires mariaux ou à découvrir l'héritage des saints, nous avons le pèlerinage qu'il vous faut."
           centered={true}
@@ -299,7 +300,7 @@ export default function PilgrimagesPage() {
         <PilgrimageFilter filters={filters} setFilters={setFilters} />
 
         {/* Résultats */}
-        {loading && <Loader text="Chargement des pèlerinages..." />}
+        {loading && <Loader text="Chargement des voyages..." />}
 
         {error && (
           <div className={styles.error}>
@@ -316,12 +317,12 @@ export default function PilgrimagesPage() {
         {!loading && !error && (
           <>
             <div className={styles.resultsInfo}>
-              <p>{filtered.length} pèlerinage{filtered.length > 1 ? 's' : ''} trouvé{filtered.length > 1 ? 's' : ''}</p>
+              <p>{filtered.length} voyage{filtered.length > 1 ? 's' : ''} trouvé{filtered.length > 1 ? 's' : ''}</p>
             </div>
 
             {filtered.length === 0 ? (
               <div className={styles.noResults}>
-                <p>Aucun pèlerinage ne correspond à vos critères.</p>
+                <p>Aucun voyage ne correspond à vos critères.</p>
                 <button 
                   onClick={() => setFilters({ destination: '', month: '', priceMax: '' })}
                   className={styles.resetButton}

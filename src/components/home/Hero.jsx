@@ -1,4 +1,3 @@
-// src/components/home/Hero.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -6,9 +5,9 @@ import Button from '@/components/ui/Button';
 import styles from './Hero.module.css';
 
 const slogans = [
-  { text: "Marchez sur les pas du Christ", color: "#FFFFFF" },
-  { text: "Vivez une expérience spirituelle inoubliable", color: "#E8C97A" },
-  { text: "Foi  •  Paix  •  Rencontre", color: "#C9A84C" }
+  { text: "Voyages de ressourcement spirituel", color: "#FFFFFF" },
+  { text: "Expériences uniques pour l’âme et l’esprit", color: "#E8C97A" },
+  { text: "Paix  •  Foi  •  Rencontre", color: "#C9A84C" }
 ];
 
 export default function Hero() {
@@ -40,13 +39,13 @@ export default function Hero() {
 
       <div className={styles.content}>
         <div className={styles.badge}>
-          ✝ PÈLERINAGES CHRÉTIENS
+          ✦ VOYAGES SPIRITUELS
         </div>
 
-        <h1 className={styles.title}>Agence Sainte Rita voyages</h1>
+        <h1 className={styles.title}>Agence Sainte Rita Voyages</h1>
 
         <p className={styles.subtitle}>
-          &ldquo;Spécialiste des voyages spirituels depuis 2004&ldquo;
+          &ldquo;Spécialiste des voyages de ressourcement spirituel depuis 2018&ldquo;
         </p>
 
         <div className={styles.sloganWrapper}>
@@ -59,8 +58,8 @@ export default function Hero() {
         </div>
 
         <div className={styles.ctaGroup}>
-          <Button href="/pelerinages" variant="primary" size="lg">
-            Découvrir nos pèlerinages
+          <Button href="/voyages" variant="primary" size="lg">
+            Découvrir nos voyages
           </Button>
           <Button href="/contact" variant="outlineWhite" size="lg">
             Nous contacter

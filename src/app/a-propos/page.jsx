@@ -9,17 +9,21 @@ import styles from './page.module.css';
 
 export const metadata = {
   title: 'À Propos — Notre Histoire | Agence Sainte Rita Voyages',
-  description: 'Découvrez Agence Sainte Rita Voyages (ASR Voyages), spécialiste des pèlerinages vers les sanctuaires chrétiens et sites de la chrétienté.',
+  description: 'Découvrez Agence Sainte Rita Voyages (ASR Voyages), spécialiste des voyages spirituels vers les sanctuaires chrétiens.',
 };
 
 export default function AboutPage() {
+  // Calcul du nombre d'années d'expérience (fondée en 2018)
+  const currentYear = new Date().getFullYear();
+  const yearsOfExperience = currentYear - 2018;
+
   // Données de l'équipe - uniquement le directeur
   const teamMembers = [
     {
       id: 1,
       nom: 'Tiendrebeogo W. Iréné',
       poste: 'Responsable de l\'agence',
-      description: 'Fondateur d\'ASR Voyages, passionné par les voyages spirituels et dévoué à offrir des expériences de pèlerinage authentiques.',
+      description: 'Fondateur d\'ASR Voyages, passionné par les voyages spirituels et dévoué à offrir des expériences de ressourcement authentiques.',
       email: 'irene.tiendrebeogo@asr-voyages.bf',
       phone: '70 26 64 41',
       photo: '/images/team/irene.jpg',
@@ -61,20 +65,20 @@ export default function AboutPage() {
             <div className={styles.historyContent}>
               <SectionTitle
                 surtitre="NOTRE HISTOIRE"
-                titre="Une agence au service des pèlerins"
+                titre="Une agence au service des voyageurs"
               />
               <p className={styles.historyText}>
-                Fondée en 2004, <strong>Agence Sainte Rita Voyages (ASR Voyages)</strong> est née d'une conviction profonde : 
-                permettre aux fidèles de vivre des expériences spirituelles authentiques sur les lieux saints de la chrétienté.
+                Fondée en <strong>2018</strong>, <strong>Agence Sainte Rita Voyages (ASR Voyages)</strong> est née d'une conviction profonde : 
+                permettre aux fidèles de vivre des expériences spirituelles authentiques sur les lieux saints.
               </p>
               <p className={styles.historyText}>
-                Nous sommes une agence spécialisée dans les voyages de tourisme et surtout les pèlerinages vers les sanctuaires 
+                Nous sommes une agence spécialisée dans les voyages de tourisme et surtout les voyages spirituels vers les sanctuaires 
                 chrétiens et les sites de hauts lieux de la chrétienté. Notre mission est d'organiser des voyages qui nourrissent 
                 la foi et créent des souvenirs impérissables.
               </p>
               <p className={styles.historyText}>
-                Depuis notre création, nous avons accompagné des milliers de pèlerins à Jérusalem, Rome, Lourdes, Fatima, 
-                Medjugorje et dans tant d'autres destinations sacrées. Chaque pèlerinage est pour nous une occasion de 
+                Depuis notre création, nous avons accompagné des milliers de voyageurs à Jérusalem, Rome, Lourdes, Fatima, 
+                Medjugorje et dans tant d'autres destinations sacrées. Chaque voyage est pour nous une occasion de 
                 vivre notre slogan : <strong className={styles.slogan}>"Vers les lieux saints"</strong>.
               </p>
             </div>
@@ -89,14 +93,14 @@ export default function AboutPage() {
           <div className={styles.statsGrid}>
             <div className={styles.statItem}>
               <span className={styles.statNumber}>+ de 150</span>
-              <span className={styles.statLabel}>Pèlerinages organisés</span>
+              <span className={styles.statLabel}>Voyages organisés</span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statNumber}>+ de 5 000</span>
               <span className={styles.statLabel}>Participants</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.statNumber}>21</span>
+              <span className={styles.statNumber}>{yearsOfExperience}</span>
               <span className={styles.statLabel}>Années d'expérience</span>
             </div>
             <div className={styles.statItem}>
@@ -151,11 +155,11 @@ export default function AboutPage() {
           <div className={styles.ctaCard}>
             <h2 className={styles.ctaTitle}>Faites confiance à notre expérience</h2>
             <p className={styles.ctaText}>
-              21 ans d'accompagnement spirituel et d'organisation de pèlerinages
+              {yearsOfExperience} ans d'accompagnement spirituel et d'organisation de voyages
             </p>
             <div className={styles.ctaButtons}>
               <Button href="/pelerinages" variant="primary" size="lg">
-                Découvrir nos pèlerinages
+                Découvrir nos voyages
               </Button>
               <Button href="/contact" variant="outline" size="lg">
                 Contactez-nous

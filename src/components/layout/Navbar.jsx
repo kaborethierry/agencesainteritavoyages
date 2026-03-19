@@ -50,7 +50,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Accueil' },
-    { href: '/pelerinages', label: 'Pèlerinages' },
+    { href: '/pelerinages', label: 'Voyages' },
     { href: '/a-propos', label: 'À Propos' },
     { href: '/contact', label: 'Contact' },
   ];
@@ -68,7 +68,7 @@ export default function Navbar() {
           />
           <div className={styles.logoText}>
             <span className={styles.logoName}>Agence Sainte Rita Voyages</span>
-            <span className={styles.logoTagline}>PÈLERINAGES CHRÉTIENS</span>
+            <span className={styles.logoTagline}>Voyages de ressourcement spirituel</span>
           </div>
         </div>
 

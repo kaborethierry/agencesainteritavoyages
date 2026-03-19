@@ -3,7 +3,8 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import EmailIcon from '@mui/icons-material/Email';
+import PhoneIcon from '@mui/icons-material/Phone';
 import styles from './TeamCard.module.css';
 
 export default function TeamCard({ member }) {
@@ -32,14 +33,14 @@ export default function TeamCard({ member }) {
             className={styles.overlayLink}
             aria-label={`Email ${nom}`}
           >
-            ✉️
+            <EmailIcon />
           </a>
           <a 
             href={`tel:${phone}`} 
             className={styles.overlayLink}
             aria-label={`Téléphone ${nom}`}
           >
-            📞
+            <PhoneIcon />
           </a>
         </div>
       </div>

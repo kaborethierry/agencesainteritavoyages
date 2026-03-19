@@ -245,7 +245,7 @@ export default async function PilgrimagePage({ params }) {
       {similarPilgrimages.length > 0 && (
         <section className={styles.similarSection}>
           <div className="container">
-            <h2 className={styles.similarTitle}>Pèlerinages similaires</h2>
+            <h2 className={styles.similarTitle}>Voyages similaires</h2>
             <div className={styles.similarGrid}>
               {similarPilgrimages.map((p) => (
                 <PilgrimageCard key={p.id} pilgrimage={p} />
@@ -261,11 +261,11 @@ export default async function PilgrimagePage({ params }) {
           <div className={styles.ctaContent}>
             <h3 className={styles.ctaTitle}>Prêt à vivre cette expérience spirituelle ?</h3>
             <p className={styles.ctaText}>
-              Réservez dès maintenant votre place pour ce pèlerinage unique
+              Réservez dès maintenant votre place pour ce voyage unique
             </p>
             <div className={styles.ctaButtons}>
               <Button href={`/inscription?pelerinage=${pilgrimage.id}`} variant="primary" size="lg">
-                S'inscrire à ce pèlerinage
+                S'inscrire à ce voyage
               </Button>
               <Button href="/contact" variant="outlineWhite" size="lg">
                 Demander plus d'informations

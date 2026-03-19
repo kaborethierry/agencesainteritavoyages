@@ -596,3 +596,58 @@
       padding: 24px 20px;
     }
   }
+  /* À ajouter dans le fichier */
+
+.infoRowIcon {
+  font-size: 18px;
+  color: var(--gold);
+  margin-right: 8px;
+}
+
+.infoRow {
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.infoRow span {
+  flex: 1;
+  color: var(--text-light);
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.infoRow strong {
+  color: var(--navy);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.infoIcon {
+  font-size: 24px;
+  color: var(--gold);
+  margin-right: 12px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  background: var(--cream);
+  padding: 20px;
+  border-radius: var(--radius-sm);
+}
+
+.inclusionIcon {
+  font-size: 20px;
+  margin-right: 8px;
+}
+
+.inclusionTitle {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 20px;
+  font-weight: 700;
+}

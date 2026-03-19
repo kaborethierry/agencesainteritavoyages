@@ -1,130 +1,135 @@
 /* src/components/about/MissionValues.module.css */
 .section {
-    padding: 80px 0;
-    background: var(--cream-dark);
-  }
-  
+  padding: 80px 0;
+  background: var(--cream-dark);
+}
+
+.missionGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+
+.missionContent {
+  max-width: 550px;
+}
+
+.missionText {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-mid);
+  margin-bottom: 24px;
+}
+
+.missionQuote {
+  padding: 24px 28px;
+  border-left: 4px solid var(--gold);
+  background: var(--white);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: var(--font-accent);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--navy);
+  margin-top: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.imageRight {
+  position: relative;
+  height: 460px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.missionImage {
+  object-fit: cover;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.valueItem {
+  text-align: center;
+  padding: 36px 20px;
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition), border-color var(--transition);
+  border-bottom: 3px solid transparent;
+}
+
+.valueItem:hover {
+  transform: translateY(-4px);
+  border-bottom-color: var(--gold);
+  box-shadow: var(--shadow-md);
+}
+
+.valueIcon {
+  font-size: 48px;
+  display: block;
+  margin-bottom: 20px;
+  color: var(--gold);
+}
+
+.valueIcon svg {
+  font-size: 48px;
+}
+
+.valueTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.valueDesc {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* Media Queries */
+@media (max-width: 992px) {
   .missionGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-bottom: 80px;
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
   
   .missionContent {
-    max-width: 550px;
-  }
-  
-  .missionText {
-    font-size: 16px;
-    line-height: 1.8;
-    color: var(--text-mid);
-    margin-bottom: 24px;
-  }
-  
-  .missionQuote {
-    padding: 24px 28px;
-    border-left: 4px solid var(--gold);
-    background: var(--white);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    font-family: var(--font-accent);
-    font-style: italic;
-    font-size: 18px;
-    color: var(--navy);
-    margin-top: 28px;
-    box-shadow: var(--shadow-sm);
+    max-width: 100%;
   }
   
   .imageRight {
-    position: relative;
-    height: 460px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--shadow-lg);
-  }
-  
-  .missionImage {
-    object-fit: cover;
+    height: 400px;
   }
   
   .valuesGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 60px 0;
   }
   
-  .valueItem {
-    text-align: center;
-    padding: 36px 20px;
-    background: var(--white);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), border-color var(--transition);
-    border-bottom: 3px solid transparent;
+  .valuesGrid {
+    grid-template-columns: 1fr;
   }
   
-  .valueItem:hover {
-    transform: translateY(-4px);
-    border-bottom-color: var(--gold);
-    box-shadow: var(--shadow-md);
+  .imageRight {
+    height: 300px;
   }
   
-  .valueIcon {
-    font-size: 48px;
-    display: block;
-    margin-bottom: 20px;
+  .missionQuote {
+    font-size: 16px;
+    padding: 20px;
   }
-  
-  .valueTitle {
-    font-family: var(--font-display);
-    font-size: 20px;
-    color: var(--navy);
-    margin-bottom: 12px;
-    font-weight: 700;
-  }
-  
-  .valueDesc {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 1.7;
-  }
-  
-  /* Media Queries */
-  @media (max-width: 992px) {
-    .missionGrid {
-      grid-template-columns: 1fr;
-      gap: 40px;
-    }
-    
-    .missionContent {
-      max-width: 100%;
-    }
-    
-    .imageRight {
-      height: 400px;
-    }
-    
-    .valuesGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 600px) {
-    .section {
-      padding: 60px 0;
-    }
-    
-    .valuesGrid {
-      grid-template-columns: 1fr;
-    }
-    
-    .imageRight {
-      height: 300px;
-    }
-    
-    .missionQuote {
-      font-size: 16px;
-      padding: 20px;
-    }
-  }
+}

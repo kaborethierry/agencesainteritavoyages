@@ -3,6 +3,8 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import styles from './PilgrimageCard.module.css';
 
 export default function PilgrimageCard({ pilgrimage }) {
@@ -23,11 +25,6 @@ export default function PilgrimageCard({ pilgrimage }) {
   // Formatage du prix en FCFA
   const formatPrice = (price, currency) => {
     return new Intl.NumberFormat('fr-FR').format(price) + ' ' + currency;
-  };
-
-  // Formatage de la date
-  const formatDate = (dateString) => {
-    return dateString;
   };
 
   const handleClick = () => {
@@ -54,7 +51,9 @@ export default function PilgrimageCard({ pilgrimage }) {
       </div>
 
       <div className={styles.body}>
-        <p className={styles.location}>📍 {location}</p>
+        <p className={styles.location}>
+          <LocationOnIcon fontSize="small" /> {location}
+        </p>
         <h3 className={styles.title}>{title}</h3>
         <p className={styles.description}>
           {description && description.length > 80 
@@ -70,7 +69,9 @@ export default function PilgrimageCard({ pilgrimage }) {
         </div>
         
         <div className={styles.dateInfo}>
-          <span className={styles.dates}>📅 {formatDate(startDate)}</span>
+          <span className={styles.dates}>
+            <CalendarTodayIcon fontSize="small" /> {startDate}
+          </span>
         </div>
         
         <button className={styles.cardBtn}>
