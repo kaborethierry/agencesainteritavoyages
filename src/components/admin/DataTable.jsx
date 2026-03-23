@@ -1,17 +1,12 @@
-// src/components/admin/DataTable.jsx
 'use client';
 
 import { useState, useMemo } from 'react';
 import Loader from '@/components/ui/Loader';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from './DataTable.module.css';
 
 export default function DataTable({ 
   columns = [], 
   data = [], 
-  onAction, 
   loading = false,
   itemsPerPage = 10 
 }) {
@@ -49,21 +44,6 @@ export default function DataTable({
     } else {
       setSortKey(key);
       setSortDir('asc');
-    }
-  };
-
-  const handleAction = (type, row) => {
-    if (onAction) {
-      onAction(type, row);
-    }
-  };
-
-  const getActionIcon = (type) => {
-    switch (type) {
-      case 'edit': return <EditIcon />;
-      case 'delete': return <DeleteIcon />;
-      case 'view': return <VisibilityIcon />;
-      default: return null;
     }
   };
 
@@ -127,15 +107,39 @@ export default function DataTable({
             ‹
           </button>
           
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-            <button
-              key={page}
-              className={`${styles.pageBtn} ${currentPage === page ? styles.pageBtnActive : ''}`}
-              onClick={() => setCurrentPage(page)}
-            >
-              {page}
-            </button>
-          ))}
+          {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
+            let pageNum;
+            if (totalPages <= 5) {
+              pageNum = i + 1;
+            } else if (currentPage <= 3) {
+              pageNum = i + 1;
+            } else if (currentPage >= totalPages - 2) {
+              pageNum = totalPages - 4 + i;
+            } else {
+              pageNum = currentPage - 2 + i;
+            }
+            return (
+              <button
+                key={pageNum}
+                className={`${styles.pageBtn} ${currentPage === pageNum ? styles.pageBtnActive : ''}`}
+                onClick={() => setCurrentPage(pageNum)}
+              >
+                {pageNum}
+              </button>
+            );
+          })}
+
+          {totalPages > 5 && currentPage < totalPages - 2 && (
+            <>
+              <span className={styles.pageDots}>...</span>
+              <button
+                className={styles.pageBtn}
+                onClick={() => setCurrentPage(totalPages)}
+              >
+                {totalPages}
+              </button>
+            </>
+          )}
 
           <button
             className={styles.pageBtn}

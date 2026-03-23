@@ -1,25 +1,25 @@
 /* src/components/inscription/InscriptionForm.module.css */
 .formPage {
-  padding: 80px 0;
+  padding: 60px 0;
   background: var(--cream);
 }
 
 .formContainer {
   max-width: 860px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 20px;
 }
 
 .formCard {
   background: var(--white);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
-  padding: 60px;
+  padding: 40px;
   border-top: 4px solid var(--gold);
 }
 
 .formSection {
-  margin-bottom: 52px;
+  margin-bottom: 40px;
 }
 
 .formSection:last-of-type {
@@ -29,15 +29,15 @@
 .sectionHeader {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 28px;
-  padding-bottom: 16px;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
   border-bottom: 1px solid var(--border);
 }
 
 .sectionNumber {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--gold);
   color: var(--navy);
@@ -46,13 +46,13 @@
   justify-content: center;
   font-family: var(--font-display);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   flex-shrink: 0;
 }
 
 .sectionTitle {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 18px;
   color: var(--navy);
   font-weight: 600;
   margin: 0;
@@ -61,17 +61,13 @@
 .formGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.formGrid.single {
-  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .formGroup.fullWidth {
@@ -80,7 +76,7 @@
 
 .formGroup label {
   font-family: var(--font-body);
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--text-dark);
   text-transform: uppercase;
@@ -95,11 +91,11 @@
 .formGroup input,
 .formGroup select,
 .formGroup textarea {
-  padding: 14px 18px;
+  padding: 12px 16px;
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   font-family: var(--font-body);
-  font-size: 15px;
+  font-size: 14px;
   color: var(--text-dark);
   background: var(--cream);
   transition: border-color var(--transition), box-shadow var(--transition);
@@ -127,12 +123,6 @@
   cursor: not-allowed;
 }
 
-.fieldNote {
-  font-size: 12px;
-  color: var(--text-light);
-  margin-top: 4px;
-}
-
 .errorMsg {
   font-size: 12px;
   color: var(--error);
@@ -143,43 +133,44 @@
 }
 
 .errorMsg svg {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .radioGroup {
   display: flex;
-  gap: 32px;
-  padding: 6px 0;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 4px 0;
 }
 
 .radioLabel {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   text-transform: none;
+  white-space: nowrap;
 }
 
 .radioLabel input[type="radio"] {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   accent-color: var(--gold);
   margin: 0;
-  padding: 0;
 }
 
 .checkboxGroup {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 12px 0;
+  gap: 12px;
+  padding: 8px 0;
 }
 
 .checkboxGroup input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   accent-color: var(--gold);
   flex-shrink: 0;
   margin-top: 2px;
@@ -194,133 +185,22 @@
   line-height: 1.5;
 }
 
-.link {
-  color: var(--gold);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  font-weight: 600;
-}
-
-.link:hover {
-  color: var(--gold-dark);
-}
-
 .submitArea {
   border-top: 1px solid var(--border);
-  padding-top: 36px;
-  margin-top: 12px;
+  padding-top: 30px;
+  margin-top: 10px;
 }
 
 .formFootnote {
   text-align: center;
   font-size: 12px;
   color: var(--text-light);
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
-/* Message de succès */
-.successMessage {
-  text-align: center;
-  padding: 60px 24px;
-}
-
-.successIcon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background: rgba(45, 106, 79, 0.1);
-  color: var(--success);
-  font-size: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 24px;
-}
-
-.successIcon svg {
-  font-size: 48px;
-}
-
-.successTitle {
-  font-family: var(--font-display);
-  font-size: 28px;
-  color: var(--navy);
-  margin-bottom: 16px;
-  font-weight: 700;
-}
-
-.successText {
-  font-size: 16px;
-  color: var(--text-mid);
-  margin-bottom: 12px;
-  line-height: 1.6;
-}
-
-.successInstruction {
-  font-size: 15px;
-  color: var(--text-dark);
-  background: var(--cream);
-  padding: 16px 24px;
-  border-radius: var(--radius-sm);
-  margin: 24px 0 32px;
-}
-
-.successActions {
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .formCard {
-    padding: 32px 24px;
-  }
-  
-  .formGrid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .sectionTitle {
-    font-size: 18px;
-  }
-  
-  .radioGroup {
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .successActions {
-    flex-direction: column;
-  }
-  
-  .successTitle {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .formPage {
-    padding: 40px 0;
-  }
-  
-  .formCard {
-    padding: 24px 16px;
-  }
-  
-  .sectionHeader {
-    margin-bottom: 20px;
-  }
-  
-  .successMessage {
-    padding: 40px 16px;
-  }
-}
-/* À ajouter dans InscriptionForm.module.css */
-
+/* Documents */
 .documentsContainer {
-  margin-top: 24px;
+  margin-top: 20px;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -331,7 +211,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px;
+  padding: 16px 20px;
   background: var(--cream);
   cursor: pointer;
   transition: background var(--transition);
@@ -344,45 +224,42 @@
 .documentsTitle {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .documentsIcon {
   color: var(--gold);
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .documentsTitle h3 {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 16px;
   color: var(--navy);
   margin: 0;
   font-weight: 600;
 }
 
 .documentsContent {
-  padding: 24px;
+  padding: 20px;
   border-top: 1px solid var(--border);
-}
-
-.destinationSection {
-  margin-bottom: 24px;
 }
 
 .destinationTitle {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 18px;
   color: var(--gold-dark);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   font-weight: 700;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
   border-bottom: 2px solid var(--gold);
 }
 
 .statutSection {
-  margin-bottom: 24px;
-  padding-left: 16px;
-  border-left: 3px solid var(--gold-light);
+  margin-bottom: 20px;
+  padding: 16px;
+  background: rgba(201, 168, 76, 0.03);
+  border-radius: var(--radius-sm);
 }
 
 .statutSection h5 {
@@ -391,13 +268,16 @@
   color: var(--navy);
   margin-bottom: 12px;
   font-weight: 600;
+  padding-left: 12px;
+  border-left: 3px solid var(--gold);
 }
 
 .commonDocs {
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   padding: 16px;
-  background: rgba(201, 168, 76, 0.05);
+  background: rgba(26, 43, 74, 0.02);
   border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
 }
 
 .commonDocs h5 {
@@ -415,25 +295,26 @@
 }
 
 .documentList li {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 8px 0;
+  position: relative;
+  padding: 8px 0 8px 24px;
   border-bottom: 1px dashed var(--border);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-dark);
+  line-height: 1.5;
+  word-break: break-word;
 }
 
 .documentList li:last-child {
   border-bottom: none;
 }
 
-.documentList input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--gold);
-  margin: 0;
-  flex-shrink: 0;
+.documentList li::before {
+  content: '•';
+  position: absolute;
+  left: 8px;
+  color: var(--gold);
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .financialNote {
@@ -443,9 +324,10 @@
   padding: 16px;
   background: rgba(201, 168, 76, 0.08);
   border-radius: var(--radius-sm);
-  margin: 20px 0;
-  font-size: 14px;
+  margin: 16px 0;
+  font-size: 13px;
   color: var(--text-mid);
+  border-left: 4px solid var(--gold);
 }
 
 .financialNote svg {
@@ -456,30 +338,149 @@
 
 .financialNote p {
   margin: 0;
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
-.documentsNote {
+.financialNote strong {
+  color: var(--navy);
+}
+
+.contactInfo {
+  margin-top: 24px;
+  padding: 20px;
+  background: linear-gradient(135deg, var(--cream) 0%, var(--white) 100%);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.contactInfo h4 {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.contactInfo p {
+  font-size: 13px;
+  color: var(--text-mid);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.contactList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.contactList li {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 16px;
-  background: var(--cream);
-  border-radius: var(--radius-sm);
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--border);
   font-size: 13px;
-  color: var(--text-light);
-  margin-top: 20px;
+  color: var(--text-dark);
+  flex-wrap: wrap;
+  word-break: break-word;
 }
 
-.documentsNote svg {
+.contactList li:last-child {
+  border-bottom: none;
+}
+
+.contactList svg {
   color: var(--gold);
   font-size: 18px;
+  flex-shrink: 0;
 }
 
-/* Media Queries supplémentaires */
+.contactList strong {
+  color: var(--navy);
+  font-weight: 600;
+}
+
+/* Message de succès */
+.successMessage {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.successIcon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--success);
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+}
+
+.successIcon svg {
+  font-size: 36px;
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.successText {
+  font-size: 15px;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.successInstruction {
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--cream);
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  margin: 20px 0 24px;
+  word-break: break-word;
+}
+
+.successActions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* Media Queries */
 @media (max-width: 768px) {
-  .documentsHeader {
-    padding: 16px 20px;
+  .formPage {
+    padding: 40px 0;
+  }
+
+  .formCard {
+    padding: 24px 20px;
+  }
+
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .sectionTitle {
+    font-size: 16px;
+  }
+
+  .radioGroup {
+    gap: 12px;
+  }
+
+  .radioLabel {
+    font-size: 13px;
+    white-space: normal;
   }
 
   .documentsContent {
@@ -487,15 +488,94 @@
   }
 
   .statutSection {
-    padding-left: 12px;
+    padding: 12px;
   }
 
   .documentList li {
-    font-size: 13px;
+    font-size: 12px;
+    padding-left: 20px;
   }
 
   .financialNote {
     flex-direction: column;
     gap: 8px;
+    padding: 12px;
   }
+
+  .contactList li {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .successActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .successTitle {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: 20px 16px;
+  }
+
+  .sectionNumber {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 15px;
+  }
+
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .radioGroup {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .checkboxLabel {
+    font-size: 13px;
+  }
+
+  .destinationTitle {
+    font-size: 16px;
+  }
+
+  .statutSection h5 {
+    font-size: 14px;
+  }
+
+  .commonDocs h5 {
+    font-size: 14px;
+  }
+}
+
+/* À ajouter dans InscriptionForm.module.css */
+
+.apiError {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(192, 57, 43, 0.1);
+  color: var(--error);
+  border-radius: var(--radius-sm);
+  margin-bottom: 24px;
+  font-size: 14px;
+  border-left: 4px solid var(--error);
+}
+
+.apiError svg {
+  font-size: 20px;
 }

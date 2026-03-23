@@ -1,110 +1,112 @@
 /* src/components/admin/StatsCard.module.css */
 .card {
-    background: var(--white);
-    border-radius: var(--radius-md);
-    padding: 28px;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    transition: transform var(--transition), box-shadow var(--transition);
+  background: var(--white);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  transition: all 0.2s ease;
+  border: 1px solid var(--border);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.iconBox {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.iconBox svg {
+  font-size: 26px;
+}
+
+.colorGold {
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--gold);
+}
+
+.colorNavy {
+  background: rgba(26, 43, 74, 0.08);
+  color: var(--navy);
+}
+
+.colorSuccess {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--success);
+}
+
+.colorWarning {
+  background: rgba(230, 126, 34, 0.1);
+  color: #E67E22;
+}
+
+.info {
+  flex: 1;
+}
+
+.value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--navy);
+  display: block;
+  line-height: 1.2;
+}
+
+.label {
+  font-size: 13px;
+  color: var(--text-light);
+  display: block;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.trend {
+  font-size: 11px;
+  margin-top: 6px;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.trendUp {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--success);
+}
+
+.trendDown {
+  background: rgba(192, 57, 43, 0.1);
+  color: var(--error);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .card {
+    padding: 16px;
+    gap: 12px;
   }
-  
-  .card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-  }
-  
-  .iconBox {
-    width: 60px;
-    height: 60px;
-    border-radius: var(--radius-sm);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    flex-shrink: 0;
-  }
-  
-  .iconBox svg {
-    font-size: 30px;
-  }
-  
-  .colorGold {
-    background: rgba(201, 168, 76, 0.12);
-    color: var(--gold);
-  }
-  
-  .colorNavy {
-    background: rgba(26, 43, 74, 0.08);
-    color: var(--navy);
-  }
-  
-  .colorSuccess {
-    background: rgba(45, 106, 79, 0.1);
-    color: var(--success);
-  }
-  
-  .colorWarning {
-    background: rgba(230, 126, 34, 0.1);
-    color: #E67E22;
-  }
-  
-  .info {
-    flex: 1;
-  }
-  
+
   .value {
-    font-family: var(--font-display);
-    font-size: 36px;
-    font-weight: 700;
-    color: var(--navy);
-    display: block;
-    line-height: 1;
+    font-size: 24px;
   }
-  
-  .label {
-    font-size: 14px;
-    color: var(--text-light);
-    display: block;
-    margin-top: 6px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+
+  .iconBox {
+    width: 44px;
+    height: 44px;
   }
-  
-  .trend {
-    font-size: 12px;
-    margin-top: 8px;
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 20px;
-    background: rgba(0, 0, 0, 0.02);
+
+  .iconBox svg {
+    font-size: 22px;
   }
-  
-  .trendUp {
-    color: var(--success);
-  }
-  
-  .trendDown {
-    color: var(--error);
-  }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .card {
-      padding: 20px;
-    }
-  
-    .value {
-      font-size: 28px;
-    }
-  
-    .iconBox {
-      width: 50px;
-      height: 50px;
-    }
-  
-    .iconBox svg {
-      font-size: 24px;
-    }
-  }
+}

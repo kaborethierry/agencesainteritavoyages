@@ -1,4 +1,3 @@
-// src/components/layout/Navbar.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -19,7 +18,6 @@ export default function Navbar() {
       setScrolled(window.scrollY > 80);
     };
     window.addEventListener('scroll', handleScroll);
-    // Nettoyage
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -42,7 +40,6 @@ export default function Navbar() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  // Fonction pour déterminer si un lien est actif
   const isActive = (path) => {
     if (path === '/' && pathname !== '/') return false;
     return pathname === path || pathname?.startsWith(path + '/');
@@ -57,11 +54,11 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`}>
-        <div className={styles.logo}>
+      <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`} aria-label="Navigation principale">
+        <Link href="/" className={styles.logo} aria-label="Accueil">
           <Image
             src="/images/logo-white.png"
-            alt="Logo Agence"
+            alt="Agence Sainte Rita Voyages - Logo"
             width={45}
             height={45}
             priority
@@ -70,14 +67,15 @@ export default function Navbar() {
             <span className={styles.logoName}>Agence Sainte Rita Voyages</span>
             <span className={styles.logoTagline}>Voyages de ressourcement spirituel</span>
           </div>
-        </div>
+        </Link>
 
-        <ul className={styles.navLinks}>
+        <ul className={styles.navLinks} role="list">
           {navLinks.map((link) => (
-            <li key={link.href}>
+            <li key={link.href} role="listitem">
               <Link
                 href={link.href}
                 className={isActive(link.href) ? styles.active : ''}
+                aria-current={isActive(link.href) ? 'page' : undefined}
               >
                 {link.label}
               </Link>
@@ -86,7 +84,7 @@ export default function Navbar() {
         </ul>
 
         <div className={styles.navActions}>
-          <Button href="/inscription" variant="primary" size="sm">
+          <Button href="/inscription" variant="primary" size="sm" aria-label="S'inscrire à un pèlerinage">
             S'inscrire
           </Button>
         </div>
@@ -95,6 +93,7 @@ export default function Navbar() {
           className={`${styles.hamburger} ${menuOpen ? styles.hamburgerOpen : ''}`}
           onClick={toggleMenu}
           aria-label="Menu"
+          aria-expanded={menuOpen}
         >
           <span></span>
           <span></span>
@@ -103,7 +102,7 @@ export default function Navbar() {
       </nav>
 
       {/* Menu Mobile */}
-      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`}>
+      <div className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ''}`} aria-label="Menu mobile">
         {navLinks.map((link) => (
           <Link
             key={link.href}

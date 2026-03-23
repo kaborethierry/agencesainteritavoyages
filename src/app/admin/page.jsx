@@ -9,6 +9,7 @@ import HourglassEmptyIcon from '@mui/icons-material/HourglassEmpty';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import { adminAPI, inscriptionAPI, pilgrimageAPI } from '@/lib/api';
 import styles from './page.module.css';
 
 export default function AdminDashboard() {
@@ -22,8 +23,8 @@ export default function AdminDashboard() {
   const [inscriptionsRecentes, setInscriptionsRecentes] = useState([]);
   const [pelerinagesActifs, setPelerinagesActifs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Date du jour
   const today = new Date();
   const formattedDate = today.toLocaleDateString('fr-FR', {
     weekday: 'long',
@@ -32,40 +33,52 @@ export default function AdminDashboard() {
     day: 'numeric'
   });
 
-  // Chargement des données
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
         setLoading(true);
+        setError(null);
         
-        // Simulation d'appels API - À remplacer par vos vrais appels
-        await new Promise(resolve => setTimeout(resolve, 1000));
+        // Récupérer les statistiques
+        const statsData = await adminAPI.getStats();
+        setStats(statsData);
         
-        // Données simulées
-        setStats({
-          total_pelerinages: 11,
-          inscriptions_en_attente: 8,
-          inscriptions_confirmees: 24,
-          messages_non_lus: 3
-        });
-
-        setInscriptionsRecentes([
-          { id: 1, nom: 'Tiendrebeogo Iréné', prenom: 'Iréné', pelerinage: 'Terre Sainte - Pâques', date: '15/03/2026', statut: 'en_attente' },
-          { id: 2, nom: 'Kaboré', prenom: 'Marie', pelerinage: 'Pologne', date: '14/03/2026', statut: 'confirmee' },
-          { id: 3, nom: 'Ouédraogo', prenom: 'Jean', pelerinage: 'Lourdes', date: '13/03/2026', statut: 'confirmee' },
-          { id: 4, nom: 'Sawadogo', prenom: 'Paul', pelerinage: 'Canada', date: '12/03/2026', statut: 'en_attente' },
-          { id: 5, nom: 'Zongo', prenom: 'Claire', pelerinage: 'Assise', date: '11/03/2026', statut: 'en_attente' },
-        ]);
-
-        setPelerinagesActifs([
-          { id: 1, titre: 'Terre Sainte - Pâques', date: '27 mars 2026', inscriptions: 12, places: 30 },
-          { id: 2, titre: 'Pologne', date: '08 avril 2026', inscriptions: 18, places: 30 },
-          { id: 3, titre: 'Circuit Marial', date: '04 mai 2026', inscriptions: 8, places: 25 },
-          { id: 4, titre: 'Canada', date: '30 août 2026', inscriptions: 5, places: 20 },
-        ]);
-
-      } catch (error) {
-        console.error('Erreur lors du chargement des données:', error);
+        // Récupérer les 5 dernières inscriptions (sans paramètre limit qui pose problème)
+        try {
+          const allInscriptions = await inscriptionAPI.getAll();
+          // Prendre les 5 dernières manuellement
+          const recentes = allInscriptions.slice(0, 5);
+          setInscriptionsRecentes(recentes.map(i => ({
+            id: i.id,
+            nom: i.nom,
+            prenom: i.prenom,
+            pelerinage: i.pelerinage_titre,
+            date: i.created_at ? new Date(i.created_at).toLocaleDateString('fr-FR') : '',
+            statut: i.statut
+          })));
+        } catch (inscErr) {
+          console.error('Erreur chargement inscriptions récentes:', inscErr);
+          setInscriptionsRecentes([]);
+        }
+        
+        // Récupérer les voyages actifs
+        try {
+          const voyages = await pilgrimageAPI.getAll({ status: 'actif' });
+          setPelerinagesActifs(voyages.slice(0, 5).map(v => ({
+            id: v.id,
+            titre: v.title,
+            date: v.startDate ? new Date(v.startDate).toLocaleDateString('fr-FR') : 'Date à définir',
+            inscriptions: v.places_reservees || 0,
+            places: v.places_total || 30
+          })));
+        } catch (voyErr) {
+          console.error('Erreur chargement voyages actifs:', voyErr);
+          setPelerinagesActifs([]);
+        }
+        
+      } catch (err) {
+        console.error('Erreur chargement dashboard:', err);
+        setError(err.message || 'Erreur lors du chargement des données');
       } finally {
         setLoading(false);
       }
@@ -74,26 +87,19 @@ export default function AdminDashboard() {
     fetchDashboardData();
   }, []);
 
-  // Colonnes pour le DataTable des inscriptions récentes
-  const inscriptionsColumns = [
-    { key: 'nom', label: 'Nom' },
-    { key: 'prenom', label: 'Prénom' },
-    { key: 'pelerinage', label: 'Pèlerinage' },
-    { key: 'date', label: 'Date' },
-    { 
-      key: 'statut', 
-      label: 'Statut',
-      render: (value) => (
-        <span className={`${styles.statusBadge} ${styles[value]}`}>
-          {value === 'en_attente' ? 'En attente' : 'Confirmé'}
-        </span>
-      )
-    },
-  ];
+  if (error) {
+    return (
+      <div className={styles.errorContainer}>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()} className={styles.retryButton}>
+          Réessayer
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.dashboard}>
-      {/* En-tête */}
       <div className={styles.header}>
         <div>
           <h1 className={styles.title}>Tableau de bord</h1>
@@ -104,10 +110,9 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Cartes de statistiques */}
       <div className={styles.statsGrid}>
         <StatsCard
-          title="Total pèlerinages"
+          title="Total voyages"
           value={stats.total_pelerinages}
           icon={<FlightIcon />}
           color="gold"
@@ -132,32 +137,52 @@ export default function AdminDashboard() {
         />
       </div>
 
-      {/* Inscriptions récentes */}
       <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Inscriptions récentes</h2>
         {loading ? (
           <div className={styles.loading}>Chargement...</div>
+        ) : inscriptionsRecentes.length === 0 ? (
+          <div className={styles.emptyMessage}>Aucune inscription pour le moment</div>
         ) : (
           <DataTable 
-            columns={inscriptionsColumns}
+            columns={[
+              { key: 'nom', label: 'Nom' },
+              { key: 'prenom', label: 'Prénom' },
+              { key: 'pelerinage', label: 'Voyage' },
+              { key: 'date', label: 'Date' },
+              { 
+                key: 'statut', 
+                label: 'Statut',
+                render: (row) => (
+                  <span className={`${styles.statusBadge} ${styles[row.statut]}`}>
+                    {row.statut === 'en_attente' ? 'En attente' : 
+                     row.statut === 'confirmee' ? 'Confirmé' : 
+                     row.statut === 'annulee' ? 'Annulé' : row.statut}
+                  </span>
+                )
+              },
+            ]}
             data={inscriptionsRecentes}
-            onRowClick={(row) => console.log('Row clicked:', row)}
+            itemsPerPage={5}
           />
         )}
       </section>
 
-      {/* Pèlerinages actifs */}
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Pèlerinages actifs</h2>
+        <h2 className={styles.sectionTitle}>Voyages actifs</h2>
         {loading ? (
           <div className={styles.loading}>Chargement...</div>
+        ) : pelerinagesActifs.length === 0 ? (
+          <div className={styles.emptyMessage}>Aucun voyage actif</div>
         ) : (
           <div className={styles.pilgrimagesList}>
             {pelerinagesActifs.map((p) => (
               <div key={p.id} className={styles.pilgrimageItem}>
                 <div className={styles.pilgrimageInfo}>
                   <h3 className={styles.pilgrimageTitle}>{p.titre}</h3>
-                  <p className={styles.pilgrimageDate}>📅 {p.date}</p>
+                  <p className={styles.pilgrimageDate}>
+                    <CalendarTodayIcon fontSize="small" /> {p.date}
+                  </p>
                 </div>
                 <div className={styles.pilgrimageStats}>
                   <div className={styles.progressBar}>

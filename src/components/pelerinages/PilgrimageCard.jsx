@@ -16,14 +16,13 @@ export default function PilgrimageCard({ pilgrimage }) {
     location,
     duration,
     price,
-    currency,
+    currency = 'FCFA',
     startDate,
     image,
     description
   } = pilgrimage;
 
-  // Formatage du prix en FCFA
-  const formatPrice = (price, currency) => {
+  const formatPrice = (price) => {
     return new Intl.NumberFormat('fr-FR').format(price) + ' ' + currency;
   };
 
@@ -31,22 +30,57 @@ export default function PilgrimageCard({ pilgrimage }) {
     router.push(`/pelerinages/${id}`);
   };
 
-  // Déterminer si c'est un pèlerinage à la une
   const isFeatured = pilgrimage.featured;
+  
+  // Fonction pour formater la date correctement
+  const formatDate = (date) => {
+    if (!date) return 'Date à confirmer';
+    
+    // Si c'est une chaîne ISO (YYYY-MM-DD) - le format de la base de données
+    if (typeof date === 'string' && /^\d{4}-\d{2}-\d{2}/.test(date)) {
+      const [year, month, day] = date.split('T')[0].split('-');
+      return `${day}/${month}/${year}`;
+    }
+    
+    // Si c'est un objet Date
+    if (date instanceof Date) {
+      const day = date.getDate().toString().padStart(2, '0');
+      const month = (date.getMonth() + 1).toString().padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    }
+    
+    // Si c'est une chaîne avec un autre format
+    if (typeof date === 'string') {
+      // Essayer de parser
+      const parsed = new Date(date);
+      if (!isNaN(parsed.getTime())) {
+        const day = parsed.getDate().toString().padStart(2, '0');
+        const month = (parsed.getMonth() + 1).toString().padStart(2, '0');
+        const year = parsed.getFullYear();
+        return `${day}/${month}/${year}`;
+      }
+      // Si c'est déjà au format DD/MM/YYYY
+      if (date.match(/^\d{2}\/\d{2}\/\d{4}/)) {
+        return date;
+      }
+    }
+    
+    return String(date);
+  };
 
   return (
     <article className={styles.card} onClick={handleClick}>
       <div className={styles.imageWrapper}>
         <Image
-          src={image}
-          alt={title}
+          src={image || '/images/pelerinages/default.jpg'}
+          alt={title || 'Voyage spirituel'}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className={styles.image}
+          priority={false}
         />
-        {isFeatured && (
-          <span className={styles.badge}>À la une</span>
-        )}
+        {isFeatured && <span className={styles.badge}>À la une</span>}
         <span className={styles.badgeDuration}>{duration}</span>
       </div>
 
@@ -65,18 +99,14 @@ export default function PilgrimageCard({ pilgrimage }) {
       <div className={styles.footer}>
         <div className={styles.priceRow}>
           <span className={styles.priceLabel}>À partir de</span>
-          <span className={styles.price}>{formatPrice(price, currency)}</span>
+          <span className={styles.price}>{formatPrice(price)}</span>
         </div>
-        
         <div className={styles.dateInfo}>
           <span className={styles.dates}>
-            <CalendarTodayIcon fontSize="small" /> {startDate}
+            <CalendarTodayIcon fontSize="small" /> {formatDate(startDate)}
           </span>
         </div>
-        
-        <button className={styles.cardBtn}>
-          Voir le programme →
-        </button>
+        <button className={styles.cardBtn}>Voir le programme →</button>
       </div>
     </article>
   );

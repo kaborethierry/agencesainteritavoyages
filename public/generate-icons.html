@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Générer les icônes</title>
+</head>
+<body>
+    <canvas id="canvas" width="512" height="512" style="display:none"></canvas>
+    <script>
+        // Couleurs du logo
+        const bgColor = '#1a2b4a';
+        const goldColor = '#c9a84c';
+        
+        function drawIcon(size, text) {
+            const canvas = document.getElementById('canvas');
+            canvas.width = size;
+            canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            
+            // Fond
+            ctx.fillStyle = bgColor;
+            ctx.fillRect(0, 0, size, size);
+            
+            // Croix
+            ctx.strokeStyle = goldColor;
+            ctx.lineWidth = size / 20;
+            ctx.beginPath();
+            ctx.moveTo(size/2, size/4);
+            ctx.lineTo(size/2, size*3/4);
+            ctx.moveTo(size/4, size/2);
+            ctx.lineTo(size*3/4, size/2);
+            ctx.stroke();
+            
+            // Cercle autour de la croix
+            ctx.beginPath();
+            ctx.arc(size/2, size/2, size/3, 0, 2 * Math.PI);
+            ctx.stroke();
+            
+            // Texte optionnel
+            if (text) {
+                ctx.fillStyle = goldColor;
+                ctx.font = `bold ${size/8}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(text, size/2, size*7/8);
+            }
+            
+            return canvas.toDataURL('image/png');
+        }
+        
+        async function download(filename, dataUrl) {
+            const link = document.createElement('a');
+            link.download = filename;
+            link.href = dataUrl;
+            link.click();
+        }
+        
+        async function generateAll() {
+            console.log('Génération des icônes...');
+            
+            // Générer les différentes tailles
+            const sizes = [
+                { size: 16, name: 'favicon-16x16.png' },
+                { size: 32, name: 'favicon-32x32.png' },
+                { size: 180, name: 'apple-touch-icon.png' },
+                { size: 192, name: 'favicon-192x192.png' },
+                { size: 512, name: 'favicon-512x512.png' }
+            ];
+            
+            for (const { size, name } of sizes) {
+                const dataUrl = drawIcon(size, '');
+                await download(name, dataUrl);
+                console.log(`✓ ${name} généré`);
+            }
+            
+            // Générer favicon.ico (on utilise le 32x32)
+            const icoDataUrl = drawIcon(32, '');
+            await download('favicon.ico', icoDataUrl);
+            console.log('✓ favicon.ico généré');
+            
+            console.log('Tous les fichiers ont été générés !');
+        }
+        
+        generateAll();
+    </script>
+</body>
+</html>

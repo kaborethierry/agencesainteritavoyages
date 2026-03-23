@@ -1,189 +1,271 @@
-/* src/app/admin/page.module.css */
 .dashboard {
-    max-width: 1400px;
-    margin: 0 auto;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-mid);
+  font-size: 14px;
+}
+
+.date svg {
+  font-size: 16px;
+  color: var(--gold);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.section {
+  margin-bottom: 48px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--navy);
+  margin-bottom: 20px;
+  font-weight: 600;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: var(--gold);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.en_attente {
+  background: rgba(230, 126, 34, 0.15);
+  color: #E67E22;
+}
+
+.statusBadge.confirmee {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--success);
+}
+
+.statusBadge.annulee {
+  background: rgba(192, 57, 43, 0.15);
+  color: var(--error);
+}
+
+.pilgrimagesList {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.pilgrimageItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+
+.pilgrimageItem:hover {
+  background: var(--cream);
+}
+
+.pilgrimageItem:last-child {
+  border-bottom: none;
+}
+
+.pilgrimageInfo {
+  flex: 1;
+}
+
+.pilgrimageTitle {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--navy);
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.pilgrimageDate {
+  font-size: 13px;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pilgrimageDate svg {
+  font-size: 14px;
+  color: var(--gold);
+}
+
+.pilgrimageStats {
+  width: 200px;
+  text-align: right;
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--cream-dark);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.pilgrimageCount {
+  font-size: 12px;
+  color: var(--text-mid);
+  display: block;
+}
+
+.loading {
+  text-align: center;
+  padding: 48px;
+  color: var(--text-light);
+  font-size: 15px;
+}
+
+.emptyMessage {
+  text-align: center;
+  padding: 48px;
+  color: var(--text-light);
+  font-size: 14px;
+  background: var(--white);
+  border-radius: 16px;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 60px;
+  background: var(--white);
+  border-radius: 16px;
+  margin: 24px;
+}
+
+.errorContainer p {
+  color: var(--error);
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+.retryButton {
+  background: var(--navy);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.retryButton:hover {
+  background: var(--navy-light);
+  transform: translateY(-2px);
+}
+
+/* Media Queries */
+@media (max-width: 1200px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+    gap: 16px;
     margin-bottom: 32px;
   }
-  
-  .title {
-    font-family: var(--font-display);
-    font-size: 32px;
-    color: var(--navy);
-    font-weight: 700;
+
+  .section {
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  .pilgrimageItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .pilgrimageStats {
+    width: 100%;
+    text-align: left;
+  }
+
+  .progressBar {
     margin-bottom: 8px;
   }
   
-  .date {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--text-mid);
-    font-size: 14px;
-    text-transform: capitalize;
+  .emptyMessage {
+    padding: 32px;
   }
   
-  .date svg {
-    font-size: 16px;
-    color: var(--gold);
+  .errorContainer {
+    padding: 40px 20px;
+    margin: 16px;
   }
-  
-  .statsGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
-    margin-bottom: 48px;
-  }
-  
-  .section {
-    margin-bottom: 48px;
-  }
-  
-  .sectionTitle {
-    font-family: var(--font-display);
-    font-size: 24px;
-    color: var(--navy);
-    margin-bottom: 24px;
-    font-weight: 600;
-    position: relative;
-    padding-bottom: 12px;
-  }
-  
-  .sectionTitle::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: var(--gold);
-  }
-  
-  .statusBadge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .statusBadge.en_attente {
-    background: rgba(230, 126, 34, 0.15);
-    color: #E67E22;
-  }
-  
-  .statusBadge.confirmee {
-    background: rgba(45, 106, 79, 0.15);
-    color: var(--success);
-  }
-  
-  .pilgrimagesList {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    overflow: hidden;
-  }
-  
-  .pilgrimageItem {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  .pilgrimageItem:last-child {
-    border-bottom: none;
-  }
-  
-  .pilgrimageInfo {
-    flex: 1;
-  }
-  
-  .pilgrimageTitle {
-    font-family: var(--font-display);
-    font-size: 16px;
-    color: var(--navy);
-    font-weight: 600;
-    margin-bottom: 4px;
-  }
-  
-  .pilgrimageDate {
-    font-size: 13px;
-    color: var(--text-light);
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  
-  .pilgrimageStats {
-    width: 250px;
-  }
-  
-  .progressBar {
-    height: 8px;
-    background: var(--cream-dark);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
-  
-  .progressFill {
-    height: 100%;
-    background: var(--gold);
-    border-radius: 4px;
-    transition: width 0.3s ease;
-  }
-  
-  .pilgrimageCount {
-    font-size: 13px;
-    color: var(--text-mid);
-    display: block;
-    text-align: right;
-  }
-  
-  .loading {
-    text-align: center;
-    padding: 48px;
-    color: var(--text-light);
-    font-size: 16px;
-  }
-  
-  /* Media Queries */
-  @media (max-width: 1200px) {
-    .statsGrid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .title {
-      font-size: 24px;
-    }
-    
-    .statsGrid {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    
-    .pilgrimageItem {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    
-    .pilgrimageStats {
-      width: 100%;
-    }
-    
-    .sectionTitle {
-      font-size: 20px;
-    }
-  }
+}

@@ -1,7 +1,6 @@
-// src/components/home/Testimonials.jsx
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import SectionTitle from '@/components/ui/SectionTitle';
 import styles from './Testimonials.module.css';
@@ -64,44 +63,49 @@ const testimonials = [
   }
 ];
 
-// Hook personnalisé pour détecter la largeur de l'écran
-function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1200,
-    height: typeof window !== 'undefined' ? window.innerHeight : 800,
-  });
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-    
-    window.addEventListener('resize', handleResize);
-    handleResize();
-    
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  return windowSize;
-}
+// Valeurs par défaut pour le SSR
+const DEFAULT_VISIBLE_COUNT = 3;
+const DEFAULT_WIDTH = 1200;
 
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlay, setIsAutoPlay] = useState(true);
-  const { width } = useWindowSize();
+  const [windowWidth, setWindowWidth] = useState(DEFAULT_WIDTH);
+  const [isMounted, setIsMounted] = useState(false);
+  const autoPlayRef = useRef(null);
 
   // Déterminer le nombre de slides visibles selon la largeur
-  const getVisibleCount = useCallback(() => {
+  const getVisibleCount = useCallback((width) => {
     if (width >= 992) return 3;
     if (width >= 600) return 2;
     return 1;
-  }, [width]);
+  }, []);
 
-  const visibleCount = getVisibleCount();
-  const maxIndex = Math.max(0, testimonials.length - visibleCount);
+  // État pour le nombre visible (initialisé avec la valeur par défaut)
+  const [visibleCount, setVisibleCount] = useState(DEFAULT_VISIBLE_COUNT);
+  const [maxIndex, setMaxIndex] = useState(Math.max(0, testimonials.length - DEFAULT_VISIBLE_COUNT));
+
+  // Mettre à jour la largeur de l'écran uniquement côté client
+  useEffect(() => {
+    setIsMounted(true);
+    
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setWindowWidth(width);
+      const newVisibleCount = getVisibleCount(width);
+      setVisibleCount(newVisibleCount);
+      const newMaxIndex = Math.max(0, testimonials.length - newVisibleCount);
+      setMaxIndex(newMaxIndex);
+      
+      // Ajuster l'index actuel si nécessaire
+      setCurrentIndex(prev => Math.min(prev, newMaxIndex));
+    };
+    
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, [getVisibleCount]);
 
   // Fonctions de navigation
   const next = useCallback(() => {
@@ -112,22 +116,24 @@ export default function Testimonials() {
     setCurrentIndex(prev => Math.max(prev - 1, 0));
   }, []);
 
-  const goTo = (index) => {
+  const goTo = useCallback((index) => {
     setCurrentIndex(Math.min(index, maxIndex));
-  };
+  }, [maxIndex]);
 
   // Auto-play
   useEffect(() => {
     if (!isAutoPlay) return;
     
-    const interval = setInterval(() => {
+    autoPlayRef.current = setInterval(() => {
       setCurrentIndex(prev => {
         if (prev >= maxIndex) return 0;
         return prev + 1;
       });
     }, 5000);
 
-    return () => clearInterval(interval);
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
   }, [maxIndex, isAutoPlay]);
 
   // Pause auto-play au survol
@@ -137,6 +143,16 @@ export default function Testimonials() {
   // Rendu des étoiles
   const renderStars = (note) => {
     return '★'.repeat(note) + '☆'.repeat(5 - note);
+  };
+
+  // Calcul du nombre de dots (uniquement côté client après montage)
+  const totalDots = Math.ceil(testimonials.length / visibleCount);
+  
+  // Déterminer le dot actif
+  const getIsDotActive = (dotIndex, dotStartIndex) => {
+    const isActive = dotStartIndex === currentIndex || 
+                     (dotStartIndex < currentIndex && dotStartIndex + visibleCount > currentIndex);
+    return isActive;
   };
 
   return (
@@ -221,17 +237,17 @@ export default function Testimonials() {
           </button>
         </div>
 
+        {/* Pagination dots - rendu uniquement après montage pour éviter l'hydratation mismatch */}
         <div className={styles.dots}>
-          {Array.from({ length: Math.ceil(testimonials.length / visibleCount) }).map((_, index) => {
-            const dotIndex = index * visibleCount;
-            const isActive = dotIndex === currentIndex || 
-                           (dotIndex < currentIndex && dotIndex + visibleCount > currentIndex);
+          {isMounted && Array.from({ length: totalDots }).map((_, index) => {
+            const dotStartIndex = index * visibleCount;
+            const isActive = getIsDotActive(index, dotStartIndex);
             
             return (
               <button
                 key={index}
                 className={`${styles.dot} ${isActive ? styles.dotActive : ''}`}
-                onClick={() => goTo(dotIndex)}
+                onClick={() => goTo(dotStartIndex)}
                 aria-label={`Aller au groupe de témoignages ${index + 1}`}
               />
             );

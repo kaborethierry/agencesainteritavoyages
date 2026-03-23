@@ -1,196 +1,191 @@
 /* src/app/admin/pelerinages/page.module.css */
 .container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.thumbnail {
+  width: 60px;
+  height: 40px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.thumbnailImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.actif {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--success);
+}
+
+.statusBadge.inactif {
+  background: rgba(192, 57, 43, 0.15);
+  color: var(--error);
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+}
+
+.actionBtn svg {
+  font-size: 18px;
+}
+
+.actionEdit {
+  background: rgba(26, 43, 74, 0.08);
+  color: var(--navy);
+}
+
+.actionEdit:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.actionView {
+  background: rgba(201, 168, 76, 0.12);
+  color: var(--gold-dark);
+}
+
+.actionView:hover {
+  background: var(--gold);
+  color: var(--navy);
+}
+
+.actionDelete {
+  background: rgba(192, 57, 43, 0.08);
+  color: var(--error);
+}
+
+.actionDelete:hover {
+  background: var(--error);
+  color: var(--white);
+}
+
+.loadingContainer {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 60px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.errorContainer {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 60px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+.errorContainer p {
+  color: var(--error);
+  margin-bottom: 16px;
+  font-size: 15px;
+}
+
+.modalContent {
+  padding: 8px 0;
+}
+
+.modalContent p {
+  font-size: 15px;
+  color: var(--text-dark);
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.modalWarning {
+  color: var(--error);
+  font-size: 13px;
+  background: rgba(192, 57, 43, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.modalActions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .title {
-    font-family: var(--font-display);
-    font-size: 32px;
-    color: var(--navy);
-    font-weight: 700;
-    margin-bottom: 8px;
+    font-size: 24px;
   }
-  
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-light);
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
   }
-  
-  .thumbnail {
-    width: 60px;
-    height: 40px;
-    border-radius: var(--radius-sm);
-    overflow: hidden;
-    background: var(--cream);
-  }
-  
-  .thumbnailImg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .placesCell {
-    font-weight: 500;
-  }
-  
-  .placesWarning {
-    color: #E67E22;
-    font-weight: 700;
-  }
-  
-  .statusBadge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .statusBadge.actif {
-    background: rgba(45, 106, 79, 0.15);
-    color: var(--success);
-  }
-  
-  .statusBadge.inactif {
-    background: rgba(192, 57, 43, 0.15);
-    color: var(--error);
-  }
-  
+
   .actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
-  
+
   .actionBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all var(--transition);
-    background: none;
+    width: 100%;
   }
-  
-  .actionBtn svg {
-    font-size: 18px;
-  }
-  
-  .actionEdit {
-    background: rgba(26, 43, 74, 0.08);
-    color: var(--navy);
-  }
-  
-  .actionEdit:hover {
-    background: var(--navy);
-    color: var(--white);
-  }
-  
-  .actionView {
-    background: rgba(201, 168, 76, 0.12);
-    color: var(--gold-dark);
-  }
-  
-  .actionView:hover {
-    background: var(--gold);
-    color: var(--navy);
-  }
-  
-  .actionDelete {
-    background: rgba(192, 57, 43, 0.08);
-    color: var(--error);
-  }
-  
-  .actionDelete:hover {
-    background: var(--error);
-    color: var(--white);
-  }
-  
-  .loadingContainer {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 60px;
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-  }
-  
-  .errorContainer {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 60px;
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-  }
-  
-  .errorContainer p {
-    color: var(--error);
-    margin-bottom: 20px;
-    font-size: 16px;
-  }
-  
-  /* Modal */
-  .modalContent {
-    padding: 8px 0;
-  }
-  
-  .modalContent p {
-    font-size: 16px;
-    color: var(--text-dark);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  
-  .modalWarning {
-    color: var(--error);
-    font-size: 14px;
-    background: rgba(192, 57, 43, 0.1);
-    padding: 12px;
-    border-radius: var(--radius-sm);
-    margin-bottom: 24px;
-  }
-  
+
   .modalActions {
-    display: flex;
-    gap: 16px;
-    justify-content: flex-end;
+    flex-direction: column;
   }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .title {
-      font-size: 24px;
-    }
-  
-    .header {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .actions {
-      flex-direction: column;
-    }
-  
-    .modalActions {
-      flex-direction: column;
-    }
-  
-    .modalActions button {
-      width: 100%;
-    }
+
+  .modalActions button {
+    width: 100%;
   }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "Agence Sainte Rita Voyages",
+    "short_name": "ASR Voyages",
+    "description": "Spécialiste des pèlerinages chrétiens depuis 2004",
+    "icons": [
+      {
+        "src": "/favicon-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "any maskable"
+      },
+      {
+        "src": "/favicon-512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }
+    ],
+    "theme_color": "#1a2b4a",
+    "background_color": "#1a2b4a",
+    "display": "standalone",
+    "start_url": "/",
+    "orientation": "portrait"
+  }

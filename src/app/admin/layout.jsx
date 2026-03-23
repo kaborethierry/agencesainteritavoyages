@@ -1,41 +1,71 @@
-// src/app/admin/layout.jsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
 import styles from './layout.module.css';
 
-// Hook d'authentification simulé
-const useAuth = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // Vérifier le token dans localStorage
-    const token = localStorage.getItem('admin_token');
-    setIsAuthenticated(!!token);
-    setLoading(false);
-  }, []);
-
-  return { isAuthenticated, loading };
-};
-
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const router = useRouter();
-  const { isAuthenticated, loading } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const isLoginPage = pathname === '/admin/login';
 
-  // Redirection si non authentifié et pas sur la page de login
+  // Vérifier l'authentification
   useEffect(() => {
-    if (!loading && !isAuthenticated && !isLoginPage) {
+    const checkAuth = () => {
+      const token = localStorage.getItem('admin_token');
+      setIsAuthenticated(!!token);
+      setLoading(false);
+    };
+    checkAuth();
+  }, []);
+
+  // Détecter si c'est un écran mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 992;
+      setIsMobile(mobile);
+      // Sur desktop, forcer la fermeture de la sidebar mobile
+      if (!mobile) {
+        setSidebarOpen(false);
+      }
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Redirection si non authentifié
+  useEffect(() => {
+    if (loading) return;
+    if (isLoginPage) return;
+    if (!isAuthenticated) {
       router.push('/admin/login');
     }
   }, [loading, isAuthenticated, isLoginPage, router]);
+
+  // Fermer la sidebar mobile quand la route change
+  useEffect(() => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  }, [pathname, isMobile]);
+
+  const toggleSidebar = useCallback(() => {
+    console.log('Toggle sidebar called, current state:', sidebarOpen);
+    setSidebarOpen(prev => !prev);
+  }, [sidebarOpen]);
+
+  const closeSidebar = useCallback(() => {
+    console.log('Close sidebar called');
+    setSidebarOpen(false);
+  }, []);
 
   // Afficher un loader pendant la vérification
   if (loading) {
@@ -52,13 +82,24 @@ export default function AdminLayout({ children }) {
     return <>{children}</>;
   }
 
+  // Si non authentifié, ne pas afficher le dashboard
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  console.log('Layout render - sidebarOpen:', sidebarOpen, 'isMobile:', isMobile);
+
   // Dashboard : afficher avec sidebar et header
   return (
     <div className={styles.adminLayout}>
-      <AdminSidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <AdminSidebar 
+        isOpen={sidebarOpen} 
+        onClose={closeSidebar} 
+        isMobile={isMobile}
+      />
       
       <div className={styles.adminMain}>
-        <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
+        <AdminHeader onMenuClick={toggleSidebar} />
         
         <main className={styles.adminContent}>
           {children}

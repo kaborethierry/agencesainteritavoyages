@@ -5,6 +5,44 @@
   border-bottom: 1px solid var(--border);
 }
 
+.contactHeader {
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 16px;
+  background: rgba(201, 168, 76, 0.1);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+}
+
+.contactTitle {
+  font-family: var(--font-display);
+  font-size: 24px;
+  color: var(--navy);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.contactInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+  color: var(--text-dark);
+}
+
+.contactInfo svg {
+  color: var(--gold);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.contactTagline {
+  font-family: var(--font-accent);
+  font-style: italic;
+  color: var(--gold-dark);
+  font-size: 18px;
+}
+
 .breadcrumb {
   font-size: 14px;
   color: var(--text-light);
@@ -39,9 +77,9 @@
 
 .assuranceGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   gap: 32px;
-  max-width: 1000px;
+  max-width: 400px;
   margin: 0 auto;
 }
 
@@ -85,29 +123,6 @@
   line-height: 1.6;
 }
 
-/* Media Queries */
-@media (max-width: 768px) {
-  .heroTitle {
-    font-size: 32px;
-  }
-  
-  .heroSubtitle {
-    font-size: 16px;
-  }
-  
-  .assuranceGrid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .heroTitle {
-    font-size: 28px;
-  }
-}
-/* À ajouter à la fin du fichier */
 .loadingContainer {
   display: flex;
   flex-direction: column;
@@ -138,42 +153,28 @@
   color: var(--text-mid);
   font-size: 16px;
 }
-/* À ajouter dans page.module.css */
 
-.contactHeader {
-  text-align: center;
-  margin-bottom: 32px;
-  padding: 16px;
-  background: rgba(201, 168, 76, 0.1);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(201, 168, 76, 0.3);
+/* Media Queries */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 32px;
+  }
+  
+  .heroSubtitle {
+    font-size: 16px;
+  }
+  
+  .contactTitle {
+    font-size: 20px;
+  }
+  
+  .contactTagline {
+    font-size: 16px;
+  }
 }
 
-.contactTitle {
-  font-family: var(--font-display);
-  font-size: 24px;
-  color: var(--navy);
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-
-.contactInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 16px;
-  color: var(--text-dark);
-}
-
-.contactInfo svg {
-  color: var(--gold);
-  margin-right: 8px;
-  vertical-align: middle;
-}
-
-.contactTagline {
-  font-family: var(--font-accent);
-  font-style: italic;
-  color: var(--gold-dark);
-  font-size: 18px;
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 28px;
+  }
 }

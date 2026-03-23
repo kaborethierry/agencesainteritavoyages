@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /inscription/success
+Disallow: /inscription/confirmation
+
+Sitemap: https://www.sainterita-voyages.com/sitemap.xml

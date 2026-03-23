@@ -1,425 +1,631 @@
 /* src/app/admin/inscriptions/page.module.css */
 .container {
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--navy);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.searchBar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.searchInputWrapper {
+  flex: 1;
+  position: relative;
+  min-width: 200px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-light);
+  font-size: 18px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  font-size: 14px;
+  background: var(--white);
+  transition: all 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+}
+
+.filterToggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 20px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--navy);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.filterToggle:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.filtersPanel {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  border: 1px solid var(--border);
+}
+
+.filterGroup {
+  min-width: 180px;
+  flex: 1;
+}
+
+.filterLabel {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.filterSelect {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--cream);
+  cursor: pointer;
+}
+
+.filterSelect:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.resetFilters {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-mid);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.resetFilters:hover {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 8px 20px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-mid);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tab:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.tabActive {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--navy);
+}
+
+.tabCount {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 50px;
+  font-size: 11px;
+}
+
+.tabActive .tabCount {
+  background: rgba(26, 43, 74, 0.15);
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusBadge.en_attente {
+  background: rgba(230, 126, 34, 0.15);
+  color: #E67E22;
+}
+
+.statusBadge.confirmee {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--success);
+}
+
+.statusBadge.annulee {
+  background: rgba(192, 57, 43, 0.15);
+  color: var(--error);
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+}
+
+.actionBtn svg {
+  font-size: 16px;
+}
+
+.actionView {
+  background: rgba(26, 43, 74, 0.08);
+  color: var(--navy);
+}
+
+.actionView:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.actionConfirm {
+  background: rgba(45, 106, 79, 0.1);
+  color: var(--success);
+}
+
+.actionConfirm:hover {
+  background: var(--success);
+  color: var(--white);
+}
+
+.actionCancel {
+  background: rgba(192, 57, 43, 0.1);
+  color: var(--error);
+}
+
+.actionCancel:hover {
+  background: var(--error);
+  color: var(--white);
+}
+
+.loadingContainer {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 60px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+
+/* Modal */
+.modalContent {
+  padding: 8px 0;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modalStatus {
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.modalStatus.en_attente {
+  background: rgba(230, 126, 34, 0.15);
+  color: #E67E22;
+}
+
+.modalStatus.confirmee {
+  background: rgba(45, 106, 79, 0.15);
+  color: var(--success);
+}
+
+.modalStatus.annulee {
+  background: rgba(192, 57, 43, 0.15);
+  color: var(--error);
+}
+
+.modalReference {
+  font-size: 12px;
+  color: var(--text-light);
+  font-family: monospace;
+}
+
+.modalGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.modalSection {
+  background: var(--cream);
+  padding: 16px;
+  border-radius: 12px;
+}
+
+.modalSection.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.modalSectionTitle {
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  font-weight: 600;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modalRow {
+  display: flex;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.modalLabel {
+  width: 100px;
+  color: var(--text-light);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.modalValue {
+  color: var(--text-dark);
+  font-weight: 400;
+  flex: 1;
+}
+
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
   .title {
-    font-family: var(--font-display);
-    font-size: 32px;
-    color: var(--navy);
-    font-weight: 700;
-    margin-bottom: 8px;
+    font-size: 24px;
   }
-  
-  .subtitle {
-    font-size: 15px;
-    color: var(--text-light);
-  }
-  
+
   .searchBar {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 20px;
+    flex-direction: column;
   }
-  
-  .searchInputWrapper {
-    flex: 1;
-    position: relative;
-  }
-  
-  .searchIcon {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--text-light);
-    font-size: 20px;
-  }
-  
-  .searchInput {
-    width: 100%;
-    padding: 14px 16px 14px 48px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius-md);
-    font-size: 15px;
-    background: var(--white);
-    transition: all var(--transition);
-  }
-  
-  .searchInput:focus {
-    outline: none;
-    border-color: var(--gold);
-    box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.1);
-  }
-  
+
   .filterToggle {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 0 20px;
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: var(--radius-md);
-    color: var(--navy);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
-  }
-  
-  .filterToggle:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  
-  .filtersPanel {
-    background: var(--white);
-    border-radius: var(--radius-md);
-    padding: 24px;
-    margin-bottom: 24px;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    gap: 24px;
-    flex-wrap: wrap;
-    align-items: flex-end;
-  }
-  
-  .filterGroup {
-    min-width: 200px;
-    flex: 1;
-  }
-  
-  .filterLabel {
-    display: block;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 8px;
-  }
-  
-  .filterSelect {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid var(--border);
-    border-radius: var(--radius-sm);
-    font-size: 14px;
-    background: var(--cream);
-    cursor: pointer;
+    justify-content: center;
+    padding: 10px;
   }
-  
-  .filterSelect:focus {
-    outline: none;
-    border-color: var(--gold);
+
+  .filtersPanel {
+    flex-direction: column;
+    align-items: stretch;
   }
-  
+
+  .filterGroup {
+    min-width: auto;
+  }
+
   .resetFilters {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 24px;
-    background: none;
-    border: 2px solid var(--border);
-    border-radius: var(--radius-sm);
-    color: var(--text-mid);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition);
-    white-space: nowrap;
+    width: 100%;
+    justify-content: center;
   }
-  
-  .resetFilters:hover {
-    border-color: var(--error);
-    color: var(--error);
-  }
-  
-  .resetFilters svg {
-    font-size: 18px;
-  }
-  
+
   .tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
     flex-wrap: wrap;
   }
-  
+
   .tab {
-    padding: 12px 24px;
-    background: var(--white);
-    border: 2px solid var(--border);
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-mid);
-    cursor: pointer;
-    transition: all var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .tab:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-  
-  .tabActive {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: var(--navy);
-  }
-  
-  .tabCount {
-    background: rgba(0, 0, 0, 0.1);
-    padding: 2px 8px;
-    border-radius: 50px;
-    font-size: 12px;
-  }
-  
-  .tabActive .tabCount {
-    background: rgba(26, 43, 74, 0.15);
-  }
-  
-  .statusBadge {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  
-  .statusBadge.en_attente {
-    background: rgba(230, 126, 34, 0.15);
-    color: #E67E22;
-  }
-  
-  .statusBadge.confirmee {
-    background: rgba(45, 106, 79, 0.15);
-    color: var(--success);
-  }
-  
-  .statusBadge.annulee {
-    background: rgba(192, 57, 43, 0.15);
-    color: var(--error);
-  }
-  
-  .actions {
-    display: flex;
-    gap: 8px;
-  }
-  
-  .actionBtn {
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-sm);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all var(--transition);
-    background: none;
-  }
-  
-  .actionBtn svg {
-    font-size: 18px;
-  }
-  
-  .actionView {
-    background: rgba(26, 43, 74, 0.08);
-    color: var(--navy);
-  }
-  
-  .actionView:hover {
-    background: var(--navy);
-    color: var(--white);
-  }
-  
-  .actionConfirm {
-    background: rgba(45, 106, 79, 0.1);
-    color: var(--success);
-  }
-  
-  .actionConfirm:hover {
-    background: var(--success);
-    color: var(--white);
-  }
-  
-  .actionCancel {
-    background: rgba(192, 57, 43, 0.1);
-    color: var(--error);
-  }
-  
-  .actionCancel:hover {
-    background: var(--error);
-    color: var(--white);
-  }
-  
-  .loadingContainer {
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    padding: 60px;
-    box-shadow: var(--shadow-sm);
-    text-align: center;
-  }
-  
-  /* Modal */
-  .modalContent {
-    padding: 8px 0;
-  }
-  
-  .modalHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 24px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  .modalStatus {
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  
-  .modalStatus.en_attente {
-    background: rgba(230, 126, 34, 0.15);
-    color: #E67E22;
-  }
-  
-  .modalStatus.confirmee {
-    background: rgba(45, 106, 79, 0.15);
-    color: var(--success);
-  }
-  
-  .modalStatus.annulee {
-    background: rgba(192, 57, 43, 0.15);
-    color: var(--error);
-  }
-  
-  .modalReference {
-    font-size: 13px;
-    color: var(--text-light);
-    font-family: monospace;
-  }
-  
-  .modalGrid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-  
-  .modalSection {
-    background: var(--cream);
-    padding: 20px;
-    border-radius: var(--radius-md);
-  }
-  
-  .modalSection.fullWidth {
-    grid-column: 1 / -1;
-  }
-  
-  .modalSectionTitle {
-    font-family: var(--font-display);
-    font-size: 16px;
-    color: var(--navy);
-    margin-bottom: 16px;
-    font-weight: 600;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  
-  .modalRow {
-    display: flex;
-    margin-bottom: 12px;
-    font-size: 14px;
-  }
-  
-  .modalLabel {
-    width: 120px;
-    color: var(--text-light);
-    font-weight: 500;
-    flex-shrink: 0;
-  }
-  
-  .modalValue {
-    color: var(--text-dark);
-    font-weight: 400;
     flex: 1;
+    justify-content: center;
+    font-size: 12px;
+    padding: 6px 12px;
   }
-  
+
+  .modalGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .modalRow {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .modalLabel {
+    width: auto;
+  }
+
   .modalFooter {
-    display: flex;
-    gap: 12px;
-    justify-content: flex-end;
+    flex-direction: column;
   }
-  
-  /* Media Queries */
-  @media (max-width: 768px) {
-    .title {
-      font-size: 24px;
-    }
-  
-    .searchBar {
-      flex-direction: column;
-    }
-  
-    .filtersPanel {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .filterGroup {
-      min-width: auto;
-    }
-  
-    .resetFilters {
-      width: 100%;
-      justify-content: center;
-    }
-  
-    .tabs {
-      flex-wrap: wrap;
-    }
-  
-    .tab {
-      flex: 1;
-      justify-content: center;
-    }
-  
-    .modalGrid {
-      grid-template-columns: 1fr;
-    }
-  
-    .modalRow {
-      flex-direction: column;
-      gap: 4px;
-    }
-  
-    .modalLabel {
-      width: auto;
-    }
-  
-    .modalFooter {
-      flex-direction: column;
-    }
-  
-    .modalFooter button {
-      width: 100%;
-    }
+
+  .modalFooter button {
+    width: 100%;
   }
+}
+/* Ajouter ce style pour le badge de statut dans le modal */
+.modalStatus.confirme {
+  background: rgba(45, 106, 79, 0.15);
+  color: #2d6a4f;
+}
+
+.modalStatus.annule {
+  background: rgba(192, 57, 43, 0.15);
+  color: #c0392b;
+}
+/* Styles pour le sélecteur de statut */
+.statusSelect {
+  padding: 6px 28px 6px 12px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 14px;
+}
+
+.statusSelect:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.statusWarning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.statusSuccess {
+  background: rgba(45, 106, 79, 0.15);
+  color: #2d6a4f;
+}
+
+.statusError {
+  background: rgba(192, 57, 43, 0.15);
+  color: #c0392b;
+}
+
+.statusBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statusWarning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.statusSuccess {
+  background: rgba(45, 106, 79, 0.15);
+  color: #2d6a4f;
+}
+
+.statusError {
+  background: rgba(192, 57, 43, 0.15);
+  color: #c0392b;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.actionBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: none;
+}
+
+.actionBtn svg {
+  font-size: 16px;
+}
+
+.actionBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.actionView {
+  background: rgba(26, 43, 74, 0.08);
+  color: var(--navy);
+}
+
+.actionView:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.actionConfirm {
+  background: rgba(45, 106, 79, 0.1);
+  color: #2d6a4f;
+}
+
+.actionConfirm:hover {
+  background: #2d6a4f;
+  color: white;
+}
+
+.actionCancel {
+  background: rgba(192, 57, 43, 0.1);
+  color: #c0392b;
+}
+
+.actionCancel:hover {
+  background: #c0392b;
+  color: white;
+}
+.tableWrapper {
+  overflow-x: auto;
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th,
+.table td {
+  padding: 14px 16px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  background: var(--cream);
+  font-weight: 600;
+  color: var(--navy);
+}
+
+.table tr:hover {
+  background: rgba(201, 168, 76, 0.05);
+}
+
+.noData {
+  text-align: center;
+  padding: 40px;
+  color: var(--text-light);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+.pageBtn {
+  padding: 8px 16px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pageBtn:hover:not(:disabled) {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.pageBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pageInfo {
+  font-size: 14px;
+  color: var(--text-mid);
+}

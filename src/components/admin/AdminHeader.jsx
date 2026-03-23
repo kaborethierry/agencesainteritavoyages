@@ -1,11 +1,10 @@
-// src/components/admin/AdminHeader.jsx
 'use client';
 
 import { useState, useEffect } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import styles from './AdminHeader.module.css';
 
-export default function AdminHeader({ titre, breadcrumb = [], onMenuClick }) {
+export default function AdminHeader({ onMenuClick }) {
   const [currentDate, setCurrentDate] = useState('');
 
   useEffect(() => {
@@ -16,26 +15,30 @@ export default function AdminHeader({ titre, breadcrumb = [], onMenuClick }) {
       month: 'long',
       year: 'numeric'
     });
-    // Mettre en majuscule la première lettre du jour
     setCurrentDate(formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1));
   }, []);
+
+  const handleClick = () => {
+    console.log('Menu button clicked - calling onMenuClick');
+    if (onMenuClick) {
+      onMenuClick();
+    }
+  };
 
   return (
     <header className={styles.header}>
       <div className={styles.left}>
-        <button className={styles.menuToggle} onClick={onMenuClick}>
+        <button className={styles.menuToggle} onClick={handleClick} aria-label="Menu">
           <MenuIcon />
         </button>
         <div className={styles.breadcrumb}>
-          {breadcrumb.map((item, index) => (
-            <span key={index}>{item.label}</span>
-          ))}
+          <span>Administration</span>
         </div>
-        <h1 className={styles.pageTitle}>{titre}</h1>
+        <h1 className={styles.pageTitle}>Tableau de bord</h1>
       </div>
 
       <div className={styles.right}>
-        <span className={styles.adminName}>👤 Administrateur</span>
+        <span className={styles.adminName}>Administrateur</span>
         <span className={styles.date}>{currentDate}</span>
       </div>
     </header>

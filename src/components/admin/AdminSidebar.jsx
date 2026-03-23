@@ -1,4 +1,3 @@
-// src/components/admin/AdminSidebar.jsx
 'use client';
 
 import Link from 'next/link';
@@ -9,11 +8,14 @@ import FlightIcon from '@mui/icons-material/Flight';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import MailIcon from '@mui/icons-material/Mail';
 import LogoutIcon from '@mui/icons-material/Logout';
+import CloseIcon from '@mui/icons-material/Close';
+import { useEffect, useState } from 'react';
 import styles from './AdminSidebar.module.css';
 
-export default function AdminSidebar({ unreadCount = 0 }) {
+export default function AdminSidebar({ isOpen = false, onClose, isMobile = false, unreadCount = 0 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const [unreadMessages, setUnreadMessages] = useState(unreadCount);
 
   const navItems = [
     { href: '/admin', icon: <DashboardIcon />, label: 'Tableau de bord' },
@@ -23,54 +25,84 @@ export default function AdminSidebar({ unreadCount = 0 }) {
       href: '/admin/messages', 
       icon: <MailIcon />, 
       label: 'Messages', 
-      badge: unreadCount 
+      badge: unreadMessages 
     },
   ];
 
   const handleLogout = () => {
     localStorage.removeItem('admin_token');
+    localStorage.removeItem('admin_user');
     router.push('/admin/login');
   };
 
+  // Pour debug
+  console.log('Sidebar render - isOpen:', isOpen, 'isMobile:', isMobile);
+
+  // Déterminer la classe CSS en fonction du mode et de l'état
+  let sidebarClasses = styles.sidebar;
+  
+  if (isMobile) {
+    // Sur mobile, ajouter la classe open si isOpen est true
+    if (isOpen) {
+      sidebarClasses += ` ${styles.open}`;
+    }
+  } else {
+    // Sur desktop, toujours visible
+    sidebarClasses += ` ${styles.desktop}`;
+  }
+
   return (
-    <aside className={styles.sidebar}>
-      <div className={styles.sidebarLogo}>
-        <Image 
-          src="/images/logo-white.png" 
-          alt="ASR Voyages" 
-          width={40} 
-          height={40} 
-        />
-        <div>
-          <span className={styles.logoText}>ASR Voyages</span>
-          <span className={styles.logoSub}>Administration</span>
+    <>
+      {/* Overlay pour mobile */}
+      {isMobile && isOpen && <div className={styles.overlay} onClick={onClose}></div>}
+      
+      <aside className={sidebarClasses}>
+        <div className={styles.sidebarHeader}>
+          <div className={styles.sidebarLogo}>
+            <Image 
+              src="/images/logo-white.png" 
+              alt="ASR Voyages" 
+              width={40} 
+              height={40} 
+            />
+            <div>
+              <span className={styles.logoText}>ASR Voyages</span>
+              <span className={styles.logoSub}>Administration</span>
+            </div>
+          </div>
+          {isMobile && (
+            <button className={styles.closeBtn} onClick={onClose}>
+              <CloseIcon />
+            </button>
+          )}
         </div>
-      </div>
 
-      <nav className={styles.sidebarNav}>
-        {navItems.map((item) => (
-          <Link
-            key={item.href}
-            href={item.href}
-            className={`${styles.navItem} ${
-              pathname === item.href ? styles.navItemActive : ''
-            }`}
-          >
-            <span className={styles.navIcon}>{item.icon}</span>
-            <span className={styles.navLabel}>{item.label}</span>
-            {item.badge > 0 && (
-              <span className={styles.navBadge}>{item.badge}</span>
-            )}
-          </Link>
-        ))}
-      </nav>
+        <nav className={styles.sidebarNav}>
+          {navItems.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.navItem} ${
+                pathname === item.href ? styles.navItemActive : ''
+              }`}
+              onClick={isMobile ? onClose : undefined}
+            >
+              <span className={styles.navIcon}>{item.icon}</span>
+              <span className={styles.navLabel}>{item.label}</span>
+              {item.badge > 0 && (
+                <span className={styles.navBadge}>{item.badge}</span>
+              )}
+            </Link>
+          ))}
+        </nav>
 
-      <div className={styles.sidebarFooter}>
-        <button className={styles.logoutBtn} onClick={handleLogout}>
-          <LogoutIcon />
-          <span>Déconnexion</span>
-        </button>
-      </div>
-    </aside>
+        <div className={styles.sidebarFooter}>
+          <button className={styles.logoutBtn} onClick={handleLogout}>
+            <LogoutIcon />
+            <span>Déconnexion</span>
+          </button>
+        </div>
+      </aside>
+    </>
   );
 }

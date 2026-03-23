@@ -651,3 +651,12 @@
   margin-bottom: 20px;
   font-weight: 700;
 }
+
+/* Ajouter à la fin du fichier PilgrimageDetail.module.css */
+.emptyMessage {
+  color: var(--text-light);
+  font-size: 14px;
+  font-style: italic;
+  padding: 16px 0;
+  text-align: center;
+}
