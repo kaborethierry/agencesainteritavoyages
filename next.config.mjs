@@ -1,17 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Désactiver l'optimisation des images en développement seulement
   images: {
-    // Pour la production, laisser l'optimisation active
     unoptimized: process.env.NODE_ENV === 'development',
-    
-    // Formats d'images modernes pour meilleures performances SEO
     formats: ['image/avif', 'image/webp'],
-    
-    // Tailles d'images optimisées pour le responsive
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    
-    // Configuration des sources d'images distantes
     remotePatterns: [
       {
         protocol: 'http',
@@ -25,27 +19,14 @@ const nextConfig = {
         port: '5000',
         pathname: '/uploads/**',
       },
-      // Pour les images locales
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3000',
-        pathname: '/images/**',
-      },
     ],
-    
-    // Minimiser la qualité pour améliorer les performances (optionnel)
     minimumCacheTTL: 60,
-    
-    // Désactiver les images dangereuses
-    dangerouslyAllowSVG: true,
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   
-  // Compression pour améliorer les performances SEO
+  // Compression pour les performances
   compress: true,
   
-  // Headers de sécurité pour le SEO
+  // Headers de sécurité
   async headers() {
     return [
       {
@@ -90,7 +71,7 @@ const nextConfig = {
     ];
   },
   
-  // Redirections pour le SEO
+  // Redirections SEO
   async redirects() {
     return [
       {
@@ -101,46 +82,19 @@ const nextConfig = {
     ];
   },
   
-  // Réécritures pour les images uploadées
-  async rewrites() {
-    return [
-      {
-        source: '/uploads/:path*',
-        destination: 'http://localhost:5000/uploads/:path*',
-      },
-    ];
+  // Configuration Turbopack (obligatoire depuis Next.js 16)
+  turbopack: {
+    // Configuration Turbopack - laisser vide ou personnaliser
   },
   
-  // Configuration des environnements
-  env: {
-    NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api',
-  },
-  
-  // Powered by header (optionnel pour le SEO)
+  // Powered by header désactivé pour le SEO
   poweredByHeader: false,
   
-  // Trailing slashes pour les URLs canoniques
+  // Trailing slashes
   trailingSlash: false,
-  
-  // Optimisation des polices
-  optimizeFonts: true,
   
   // Autoriser les connexions à localhost en développement
   allowedDevOrigins: ['localhost', '127.0.0.1'],
-  
-  // Webpack configuration pour optimiser les bundles
-  webpack: (config, { isServer }) => {
-    // Optimiser les chargements
-    if (!isServer) {
-      config.resolve.fallback = {
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
-    return config;
-  },
 };
 
 export default nextConfig;
