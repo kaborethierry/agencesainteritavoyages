@@ -4,7 +4,17 @@
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ghostwhite-ant-855293.hostingersite.com/api';
 
-// Données locales de secours (si l'API est indisponible)
+// Normalisation des URLs d'images
+const normalizeImageUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http')) return url;
+  if (url.startsWith('/uploads')) {
+    return `https://ghostwhite-ant-855293.hostingersite.com${url}`;
+  }
+  return url;
+};
+
+// Données locales de secours
 const localPilgrimages = [
   {
     id: 'terre-sainte-jerusalem-paques-2026',
@@ -115,7 +125,6 @@ const localPilgrimages = [
   }
 ];
 
-// Utilitaires
 const safeParseJSON = (str, defaultValue = []) => {
   if (!str) return defaultValue;
   if (Array.isArray(str)) return str;
@@ -126,7 +135,6 @@ const safeParseJSON = (str, defaultValue = []) => {
   }
 };
 
-// Transformation des données API -> Frontend
 function transformPilgrimage(data) {
   if (!data) return null;
   
@@ -146,7 +154,7 @@ function transformPilgrimage(data) {
     inscription_deadline: data.inscription_deadline || '',
     description: data.description || '',
     long_description: data.long_description || data.longDescription || '',
-    image: data.image || '',
+    image: normalizeImageUrl(data.image || ''),
     gallery: safeParseJSON(data.gallery, []),
     month: data.month || '',
     featured: data.featured === 1 || data.featured === true,
@@ -163,7 +171,6 @@ function transformPilgrimage(data) {
   };
 }
 
-// Transformation des données Frontend -> API
 function transformToBackend(data) {
   return {
     id: data.id,
@@ -194,7 +201,6 @@ function transformToBackend(data) {
   };
 }
 
-// Requête HTTP générique
 async function request(endpoint, options = {}) {
   const url = `${API_BASE_URL}${endpoint}`;
   const token = typeof window !== 'undefined' ? localStorage.getItem('admin_token') : null;
@@ -227,7 +233,6 @@ async function request(endpoint, options = {}) {
   }
 }
 
-// ==================== API Pèlerinages ====================
 export const pilgrimageAPI = {
   getAll: async (params = {}) => {
     try {
@@ -303,7 +308,6 @@ export const pilgrimageAPI = {
   }
 };
 
-// ==================== API Authentification ====================
 export const authAPI = {
   login: async (email, password) => {
     const result = await request('/auth/login', { 
@@ -342,7 +346,6 @@ export const authAPI = {
   }
 };
 
-// ==================== API Inscriptions ====================
 export const inscriptionAPI = {
   create: (data) => request('/inscriptions', { method: 'POST', body: JSON.stringify(data) }),
   getAll: async (params = {}) => { 
@@ -354,7 +357,6 @@ export const inscriptionAPI = {
   delete: (id) => request(`/inscriptions/${id}`, { method: 'DELETE' })
 };
 
-// ==================== API Contact ====================
 export const contactAPI = {
   send: (data) => request('/contact', { method: 'POST', body: JSON.stringify(data) }),
   getAll: async (params = {}) => { 
@@ -366,13 +368,11 @@ export const contactAPI = {
   delete: (id) => request(`/contact/${id}`, { method: 'DELETE' })
 };
 
-// ==================== API Admin ====================
 export const adminAPI = {
   getStats: () => request('/admin/stats'),
   getDashboard: () => request('/admin/dashboard')
 };
 
-// ==================== API Upload ====================
 export const uploadAPI = {
   uploadImage: async (file, type = 'pelerinages') => {
     const formData = new FormData();
@@ -405,7 +405,6 @@ export const uploadAPI = {
   }
 };
 
-// ==================== Export principal ====================
 const api = { 
   auth: authAPI, 
   pilgrimages: pilgrimageAPI, 
