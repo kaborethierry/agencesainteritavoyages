@@ -9,13 +9,11 @@ import ListAltIcon from '@mui/icons-material/ListAlt';
 import MailIcon from '@mui/icons-material/Mail';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from '@mui/icons-material/Close';
-import { useEffect, useState } from 'react';
 import styles from './AdminSidebar.module.css';
 
 export default function AdminSidebar({ isOpen = false, onClose, isMobile = false, unreadCount = 0 }) {
   const pathname = usePathname();
   const router = useRouter();
-  const [unreadMessages, setUnreadMessages] = useState(unreadCount);
 
   const navItems = [
     { href: '/admin', icon: <DashboardIcon />, label: 'Tableau de bord' },
@@ -25,7 +23,7 @@ export default function AdminSidebar({ isOpen = false, onClose, isMobile = false
       href: '/admin/messages', 
       icon: <MailIcon />, 
       label: 'Messages', 
-      badge: unreadMessages 
+      badge: unreadCount 
     },
   ];
 
@@ -35,25 +33,17 @@ export default function AdminSidebar({ isOpen = false, onClose, isMobile = false
     router.push('/admin/login');
   };
 
-  // Pour debug
-  console.log('Sidebar render - isOpen:', isOpen, 'isMobile:', isMobile);
-
-  // Déterminer la classe CSS en fonction du mode et de l'état
+  // Classes CSS
   let sidebarClasses = styles.sidebar;
   
   if (isMobile) {
-    // Sur mobile, ajouter la classe open si isOpen est true
-    if (isOpen) {
-      sidebarClasses += ` ${styles.open}`;
-    }
+    sidebarClasses += isOpen ? ` ${styles.open}` : '';
   } else {
-    // Sur desktop, toujours visible
     sidebarClasses += ` ${styles.desktop}`;
   }
 
   return (
     <>
-      {/* Overlay pour mobile */}
       {isMobile && isOpen && <div className={styles.overlay} onClick={onClose}></div>}
       
       <aside className={sidebarClasses}>

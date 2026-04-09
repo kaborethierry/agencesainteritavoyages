@@ -16,6 +16,12 @@
   width: calc(100% - 280px);
 }
 
+/* Classe pour quand la sidebar mobile est ouverte */
+.adminMainShifted {
+  margin-left: 0;
+  width: 100%;
+}
+
 .adminContent {
   flex: 1;
   padding: 24px 32px;

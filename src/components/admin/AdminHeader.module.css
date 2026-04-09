@@ -20,7 +20,9 @@
 }
 
 .menuToggle {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   color: var(--navy);
@@ -96,8 +98,6 @@
 
   .menuToggle {
     display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
   .breadcrumb {

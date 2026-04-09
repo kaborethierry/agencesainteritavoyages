@@ -58,12 +58,10 @@ export default function AdminLayout({ children }) {
   }, [pathname, isMobile]);
 
   const toggleSidebar = useCallback(() => {
-    console.log('Toggle sidebar called, current state:', sidebarOpen);
     setSidebarOpen(prev => !prev);
-  }, [sidebarOpen]);
+  }, []);
 
   const closeSidebar = useCallback(() => {
-    console.log('Close sidebar called');
     setSidebarOpen(false);
   }, []);
 
@@ -87,9 +85,6 @@ export default function AdminLayout({ children }) {
     return null;
   }
 
-  console.log('Layout render - sidebarOpen:', sidebarOpen, 'isMobile:', isMobile);
-
-  // Dashboard : afficher avec sidebar et header
   return (
     <div className={styles.adminLayout}>
       <AdminSidebar 
@@ -98,8 +93,8 @@ export default function AdminLayout({ children }) {
         isMobile={isMobile}
       />
       
-      <div className={styles.adminMain}>
-        <AdminHeader onMenuClick={toggleSidebar} />
+      <div className={`${styles.adminMain} ${isMobile && sidebarOpen ? styles.adminMainShifted : ''}`}>
+        <AdminHeader onMenuClick={toggleSidebar} isMobile={isMobile} />
         
         <main className={styles.adminContent}>
           {children}
