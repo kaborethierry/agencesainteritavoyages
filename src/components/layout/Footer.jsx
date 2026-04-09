@@ -40,7 +40,7 @@ export default function Footer() {
             <h3 className={styles.brandName}>Agence Sainte Rita Voyages</h3>
             <p className={styles.brandSlogan}>Vers les lieux saints</p>
             <p>
-              Spécialiste des pèlerinages chrétiens depuis 2004. Marchez sur les pas du Christ, 
+            Spécialiste des voyages de ressourcement spirituel depuis 2018  . Marchez sur les pas du Christ, 
               priez dans les sanctuaires mariaux et vivez une expérience spirituelle unique.
             </p>
             <div className={styles.socialIcons}>

@@ -58,7 +58,7 @@ export default function Hero() {
         </div>
 
         <div className={styles.ctaGroup}>
-          <Button href="/voyages" variant="primary" size="lg">
+          <Button href="/pelerinages" variant="primary" size="lg">
             Découvrir nos voyages
           </Button>
           <Button href="/contact" variant="outlineWhite" size="lg">
