@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
@@ -13,48 +13,47 @@ export default function AdminLayout({ children }) {
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-
   const isLoginPage = pathname === '/admin/login';
+  
+  // Utiliser useRef pour éviter les appels asynchrones problématiques
+  const initialCheckDone = useRef(false);
 
-  // Vérifier l'authentification
+  // Vérifier l'authentification - une seule fois
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('admin_token');
-      setIsAuthenticated(!!token);
-      setLoading(false);
-    };
-    checkAuth();
+    if (initialCheckDone.current) return;
+    initialCheckDone.current = true;
+    
+    const token = localStorage.getItem('admin_token');
+    setIsAuthenticated(!!token);
+    setLoading(false);
   }, []);
 
-  // Détecter si c'est un écran mobile
+  // Détecter si c'est un écran mobile - sans setState dans l'effet principal
   useEffect(() => {
     const checkMobile = () => {
       const mobile = window.innerWidth <= 992;
       setIsMobile(mobile);
-      // Sur desktop, forcer la fermeture de la sidebar mobile
-      if (!mobile) {
-        setSidebarOpen(false);
-      }
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Redirection si non authentifié
+  // Redirection si non authentifié - UNIQUEMENT après chargement
   useEffect(() => {
     if (loading) return;
     if (isLoginPage) return;
     if (!isAuthenticated) {
-      router.push('/admin/login');
+      router.replace('/admin/login');
     }
   }, [loading, isAuthenticated, isLoginPage, router]);
 
-  // Fermer la sidebar mobile quand la route change
+  // Fermer la sidebar quand la route change (mobile uniquement)
   useEffect(() => {
-    if (isMobile) {
+    if (isMobile && sidebarOpen) {
       setSidebarOpen(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname, isMobile]);
 
   const toggleSidebar = useCallback(() => {
@@ -93,9 +92,8 @@ export default function AdminLayout({ children }) {
         isMobile={isMobile}
       />
       
-      <div className={`${styles.adminMain} ${isMobile && sidebarOpen ? styles.adminMainShifted : ''}`}>
+      <div className={styles.adminMain}>
         <AdminHeader onMenuClick={toggleSidebar} isMobile={isMobile} />
-        
         <main className={styles.adminContent}>
           {children}
         </main>

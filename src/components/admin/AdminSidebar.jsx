@@ -19,12 +19,7 @@ export default function AdminSidebar({ isOpen = false, onClose, isMobile = false
     { href: '/admin', icon: <DashboardIcon />, label: 'Tableau de bord' },
     { href: '/admin/pelerinages', icon: <FlightIcon />, label: 'Pèlerinages' },
     { href: '/admin/inscriptions', icon: <ListAltIcon />, label: 'Inscriptions' },
-    { 
-      href: '/admin/messages', 
-      icon: <MailIcon />, 
-      label: 'Messages', 
-      badge: unreadCount 
-    },
+    { href: '/admin/messages', icon: <MailIcon />, label: 'Messages', badge: unreadCount },
   ];
 
   const handleLogout = () => {
@@ -33,28 +28,17 @@ export default function AdminSidebar({ isOpen = false, onClose, isMobile = false
     router.push('/admin/login');
   };
 
-  // Classes CSS
-  let sidebarClasses = styles.sidebar;
-  
-  if (isMobile) {
-    sidebarClasses += isOpen ? ` ${styles.open}` : '';
-  } else {
-    sidebarClasses += ` ${styles.desktop}`;
-  }
+  // Classes CSS simplifiées
+  const sidebarClass = `${styles.sidebar} ${isMobile ? (isOpen ? styles.open : '') : styles.desktop}`;
 
   return (
     <>
       {isMobile && isOpen && <div className={styles.overlay} onClick={onClose}></div>}
       
-      <aside className={sidebarClasses}>
+      <aside className={sidebarClass}>
         <div className={styles.sidebarHeader}>
           <div className={styles.sidebarLogo}>
-            <Image 
-              src="/images/logo-white.png" 
-              alt="ASR Voyages" 
-              width={40} 
-              height={40} 
-            />
+            <Image src="/images/logo-white.png" alt="ASR Voyages" width={40} height={40} />
             <div>
               <span className={styles.logoText}>ASR Voyages</span>
               <span className={styles.logoSub}>Administration</span>
@@ -72,16 +56,12 @@ export default function AdminSidebar({ isOpen = false, onClose, isMobile = false
             <Link
               key={item.href}
               href={item.href}
-              className={`${styles.navItem} ${
-                pathname === item.href ? styles.navItemActive : ''
-              }`}
+              className={`${styles.navItem} ${pathname === item.href ? styles.navItemActive : ''}`}
               onClick={isMobile ? onClose : undefined}
             >
               <span className={styles.navIcon}>{item.icon}</span>
               <span className={styles.navLabel}>{item.label}</span>
-              {item.badge > 0 && (
-                <span className={styles.navBadge}>{item.badge}</span>
-              )}
+              {item.badge > 0 && <span className={styles.navBadge}>{item.badge}</span>}
             </Link>
           ))}
         </nav>

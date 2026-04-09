@@ -27,11 +27,9 @@ export default function AdminHeader({ onMenuClick, isMobile = false }) {
   return (
     <header className={styles.header}>
       <div className={styles.left}>
-        {(isMobile || window.innerWidth <= 992) && (
-          <button className={styles.menuToggle} onClick={handleClick} aria-label="Menu">
-            <MenuIcon />
-          </button>
-        )}
+        <button className={styles.menuToggle} onClick={handleClick} aria-label="Menu">
+          <MenuIcon />
+        </button>
         <div className={styles.breadcrumb}>
           <span>Administration</span>
         </div>
