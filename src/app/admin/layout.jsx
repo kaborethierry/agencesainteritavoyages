@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, startTransition } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/AdminSidebar';
 import AdminHeader from '@/components/admin/AdminHeader';
@@ -15,31 +15,44 @@ export default function AdminLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
   const isLoginPage = pathname === '/admin/login';
   
-  // Utiliser useRef pour éviter les appels asynchrones problématiques
   const initialCheckDone = useRef(false);
+  const previousPathname = useRef(pathname);
 
-  // Vérifier l'authentification - une seule fois
+  // 1️⃣ Vérification d'authentification - avec startTransition pour éviter l'erreur
   useEffect(() => {
     if (initialCheckDone.current) return;
     initialCheckDone.current = true;
     
     const token = localStorage.getItem('admin_token');
-    setIsAuthenticated(!!token);
-    setLoading(false);
+    startTransition(() => {
+      setIsAuthenticated(!!token);
+      setLoading(false);
+    });
   }, []);
 
-  // Détecter si c'est un écran mobile - sans setState dans l'effet principal
+  // 2️⃣ Détection mobile - avec startTransition
   useEffect(() => {
+    let isMounted = true;
+    
     const checkMobile = () => {
-      const mobile = window.innerWidth <= 992;
-      setIsMobile(mobile);
+      if (isMounted) {
+        const mobile = window.innerWidth <= 992;
+        startTransition(() => {
+          setIsMobile(mobile);
+        });
+      }
     };
+    
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    
+    return () => {
+      isMounted = false;
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
-  // Redirection si non authentifié - UNIQUEMENT après chargement
+  // 3️⃣ Redirection si non authentifié
   useEffect(() => {
     if (loading) return;
     if (isLoginPage) return;
@@ -48,23 +61,33 @@ export default function AdminLayout({ children }) {
     }
   }, [loading, isAuthenticated, isLoginPage, router]);
 
-  // Fermer la sidebar quand la route change (mobile uniquement)
+  // 4️⃣ Fermer la sidebar quand la route change - avec startTransition
   useEffect(() => {
-    if (isMobile && sidebarOpen) {
-      setSidebarOpen(false);
+    if (previousPathname.current !== pathname) {
+      previousPathname.current = pathname;
+      if (isMobile && sidebarOpen) {
+        startTransition(() => {
+          setSidebarOpen(false);
+        });
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, isMobile]);
+  }, [pathname, isMobile, sidebarOpen]);
 
+  // 5️⃣ toggleSidebar - avec fonction de mise à jour fonctionnelle (pas d'erreur)
   const toggleSidebar = useCallback(() => {
-    setSidebarOpen(prev => !prev);
+    startTransition(() => {
+      setSidebarOpen(prev => !prev);
+    });
   }, []);
 
+  // 6️⃣ closeSidebar - avec startTransition
   const closeSidebar = useCallback(() => {
-    setSidebarOpen(false);
+    startTransition(() => {
+      setSidebarOpen(false);
+    });
   }, []);
 
-  // Afficher un loader pendant la vérification
+  // Éviter les rendus pendant le chargement
   if (loading) {
     return (
       <div className={styles.loadingContainer}>
@@ -74,12 +97,10 @@ export default function AdminLayout({ children }) {
     );
   }
 
-  // Page de login : afficher sans layout
   if (isLoginPage) {
     return <>{children}</>;
   }
 
-  // Si non authentifié, ne pas afficher le dashboard
   if (!isAuthenticated) {
     return null;
   }
@@ -94,9 +115,9 @@ export default function AdminLayout({ children }) {
       
       <div className={styles.adminMain}>
         <AdminHeader onMenuClick={toggleSidebar} isMobile={isMobile} />
-        <main className={styles.adminContent}>
+        <div className={styles.adminContent}>
           {children}
-        </main>
+        </div>
       </div>
     </div>
   );

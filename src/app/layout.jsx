@@ -1,7 +1,6 @@
 import './globals.css';
-import Navbar from '@/components/layout/Navbar';
-import Footer from '@/components/layout/Footer';
 import GlobalLoader from '@/components/ui/GlobalLoader';
+import ClientLayout from '@/components/ClientLayout';
 
 // 📌 METADATA pour le SEO - OPTIMISÉ
 export const metadata = {
@@ -65,7 +64,7 @@ export const metadata = {
   },
   manifest: '/site.webmanifest',
   verification: {
-    google: 'votre-code-de-verification-google', // À remplacer par votre code
+    google: 'votre-code-de-verification-google',
   },
   category: 'travel',
 };
@@ -75,9 +74,7 @@ export default function RootLayout({ children }) {
     <html lang="fr">
       <body>
         <GlobalLoader />
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
